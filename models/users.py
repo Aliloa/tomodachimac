@@ -1,6 +1,15 @@
 from .db import mydb
+import hashlib
 
 def connexion(pseudo, mdp):
-    cur = mydb.cursor(dictionary=True)
-    cur.execute("SELECT * FROM users WHERE pseudo=%s AND mdp=%s", (pseudo, mdp))
-    return cur.fetchone()
+    mdp_hashe = hashlib.sha256(mdp.encode()).hexdigest()
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM users WHERE pseudo=%s AND mdp=%s", (pseudo, mdp_hashe))
+    return mycursor.fetchone()
+
+def inscription(pseudo, mdp):
+    mdp_hashe = hashlib.sha256(mdp.encode()).hexdigest()
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("INSERT INTO users(pseudo, mdp) VALUES (%s, %s)", (pseudo, mdp_hashe))
+    mydb.commit()
+    mycursor.close()

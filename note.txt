@@ -1,1 +1,2 @@
-ajouter service entre route et models
+- ajouter service entre route et models
+- eviter d'avoir 2 memes pseudo
