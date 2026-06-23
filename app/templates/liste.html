@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Liste des étudiants</title>
+</head>
+
+<body>
+    <table border='1' width='100%'>
+        <tr>
+            <td>ID</td>
+            <td>Nom</td>
+            <td>Supprimer</td>
+        </tr>
+        {% for etudiant in etudiants %}
+        <tr>
+            <td>{{etudiant.id}}</td>
+            <td>{{etudiant.nom}}</td>
+            <td>
+                <form action='/supprimer' method='POST'>
+                    <input type='hidden' name='id' value='{{etudiant.id}}'>
+                    <button type='submit'>Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>
+        <a href='/'>Retour au menu</a>
+        <a href='/saisie'>Ajouter un étudiant</a>
+    </p>
+</body>
+
+</html>
