@@ -1,6 +1,6 @@
 
 from flask import Flask, render_template, request
-import app.models.modele as modele
+import modele
 
 server = Flask(__name__)
 
