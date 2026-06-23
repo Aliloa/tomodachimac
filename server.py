@@ -29,7 +29,7 @@ def connexion():
     return render_template('connexion.html')
 
 @server.route('/connexion', methods=['POST'])
-def connexion():
+def connexion_post():
     pseudo = request.form['pseudo']
     mdp = request.form['mdp']
     user = modele.connexion(pseudo, mdp)
