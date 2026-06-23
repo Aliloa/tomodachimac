@@ -24,6 +24,20 @@ def supprimer():
     modele.deleteData(request.form['id'])
     return accueil()
 
+@server.route('/connexion', methods=['GET'])
+def connexion():
+    return render_template('connexion.html')
+
+@server.route('/connexion', methods=['POST'])
+def connexion():
+    pseudo = request.form['pseudo']
+    mdp = request.form['mdp']
+    user = modele.connexion(pseudo, mdp)
+    if user:
+        return render_template('profile.html')
+    else:
+        return render_template('login.html', erreur="Identifiants invalides")
+
 #pour voir le lien du serveur
 if __name__=="__main__":
     server.run(debug=True)

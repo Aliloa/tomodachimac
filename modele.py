@@ -34,3 +34,9 @@ def deleteData(delete_id):
     mycursor.execute("DELETE FROM users WHERE id = %s", (delete_id,))
     mydb.commit()
     mycursor.close()
+
+def connexion(pseudo, mdp):
+    mydb = initDb()
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM users WHERE pseudo = %s AND mdp = %s", (pseudo, mdp))
+    return mycursor.fetchone()  # renvoie l'user si trouvé, None sinon
