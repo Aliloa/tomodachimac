@@ -4,29 +4,29 @@ import modele as modele
 
 server = Flask(__name__)
 
-@server.route('/')
-def accueil():
-    users = modele.getData()
-    print(users)
-    return render_template('liste.html', users=users)
+# @server.route('/')
+# def accueil():
+#     users = modele.getData()
+#     print(users)
+#     return render_template('liste.html', users=users)
 
-@server.route('/saisie')
-def saisie():
-    return render_template('form.html')
+# @server.route('/saisie')
+# def saisie():
+#     return render_template('form.html')
 
-@server.route('/ajout', methods=['POST'])
-def ajout():
-    modele.inputData(request.form['nom'])
-    return accueil()
+# @server.route('/ajout', methods=['POST'])
+# def ajout():
+#     modele.inputData(request.form['nom'])
+#     return accueil()
 
-@server.route('/supprimer', methods=['POST'])
-def supprimer():
-    modele.deleteData(request.form['id'])
-    return accueil()
+# @server.route('/supprimer', methods=['POST'])
+# def supprimer():
+#     modele.deleteData(request.form['id'])
+#     return accueil()
 
-@server.route('/connexion', methods=['GET'])
+@server.route('/', methods=['GET'])
 def connexion():
-    return render_template('connexion.html')
+    return render_template('login.html')
 
 @server.route('/connexion', methods=['POST'])
 def connexion_post():
