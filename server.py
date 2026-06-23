@@ -1,14 +1,14 @@
 
 from flask import Flask, render_template, request
-import modele
+import modele as modele
 
 server = Flask(__name__)
 
 @server.route('/')
 def accueil():
-    etudiants = modele.getData()
-    print(etudiants)
-    return render_template('liste.html', etudiants=etudiants)
+    users = modele.getData()
+    print(users)
+    return render_template('liste.html', users=users)
 
 @server.route('/saisie')
 def saisie():

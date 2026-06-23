@@ -5,7 +5,7 @@ def initDb():
         host="localhost",
         user="root",
         password="",
-        database="test"
+        database="tomodachimac"
     )
 
 #recup données
@@ -13,7 +13,7 @@ def getData():
     print('---------------------')
     mydb = initDb()
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute('''select * from etudiants''')
+    mycursor.execute('''select * from users''')
     result = mycursor.fetchall()
     return result
 
@@ -21,7 +21,7 @@ def getData():
 def inputData(nom):
     mydb = initDb()
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("INSERT INTO etudiants (nom) VALUES (%s)", (nom,))
+    mycursor.execute("INSERT INTO users (nom) VALUES (%s)", (nom,))
     mydb.commit()
     mycursor.close()
 
@@ -31,6 +31,6 @@ def inputData(nom):
 def deleteData(delete_id):
     mydb = initDb()
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("DELETE FROM etudiants WHERE id = %s", (delete_id,))
+    mycursor.execute("DELETE FROM users WHERE id = %s", (delete_id,))
     mydb.commit()
     mycursor.close()

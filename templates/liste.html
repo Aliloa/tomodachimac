@@ -9,16 +9,16 @@
     <table border='1' width='100%'>
         <tr>
             <td>ID</td>
-            <td>Nom</td>
+            <td>pseudo</td>
             <td>Supprimer</td>
         </tr>
-        {% for etudiant in etudiants %}
+        {% for user in users %}
         <tr>
-            <td>{{etudiant.id}}</td>
-            <td>{{etudiant.nom}}</td>
+            <td>{{user.id_compte}}</td>
+            <td>{{user.pseudo}}</td>
             <td>
                 <form action='/supprimer' method='POST'>
-                    <input type='hidden' name='id' value='{{etudiant.id}}'>
+                    <input type='hidden' name='id' value='{{user.id_compte}}'>
                     <button type='submit'>Supprimer</button>
                 </form>
             </td>
