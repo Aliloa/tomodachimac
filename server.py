@@ -1,24 +1,29 @@
-from flask import Blueprint, render_template, request
-import app.models.modele as modele
 
-etudiants_bp = Blueprint("etudiants", __name__)
+from flask import Flask, render_template, request
+import modele
 
-@etudiants_bp.route('/')
+server = Flask(__name__)
+
+@server.route('/')
 def accueil():
     etudiants = modele.getData()
     print(etudiants)
     return render_template('liste.html', etudiants=etudiants)
 
-@etudiants_bp.route('/saisie')
+@server.route('/saisie')
 def saisie():
     return render_template('form.html')
 
-@etudiants_bp.route('/ajout', methods=['POST'])
+@server.route('/ajout', methods=['POST'])
 def ajout():
     modele.inputData(request.form['nom'])
     return accueil()
 
-@etudiants_bp.route('/supprimer', methods=['POST'])
+@server.route('/supprimer', methods=['POST'])
 def supprimer():
     modele.deleteData(request.form['id'])
     return accueil()
+
+#pour voir le lien du serveur
+if __name__=="__main__":
+    server.run(debug=True)
