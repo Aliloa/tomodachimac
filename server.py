@@ -1,6 +1,8 @@
 
 from flask import Flask, render_template, request
-import modele as modele
+import models.db as db
+import models.mii as mii
+import models.users as users
 
 server = Flask(__name__)
 
@@ -32,11 +34,12 @@ def connexion():
 def connexion_post():
     pseudo = request.form['pseudo']
     mdp = request.form['mdp']
-    user = modele.connexion(pseudo, mdp)
+    user = users.connexion(pseudo, mdp)
     if user:
         return render_template('profile.html')
     else:
         return render_template('login.html', erreur="Identifiants invalides")
+
 
 #pour voir le lien du serveur
 if __name__=="__main__":
