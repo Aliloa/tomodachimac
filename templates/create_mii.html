@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Mii</title>
+</head>
+<body>
+    <h1>create new mii</h1>
+    {% if erreur %}
+        <p style="color:red">{{erreur}}</p>
+    {% endif %}
+    <form action="/create_mii" method="POST" enctype="multipart/form-data">
+        Name: <input type="text" name="name">
+        Age: <input type="number" name="age">
+        Sex:
+        <select name="sex">
+            <option value="woman">woman</option>
+            <option value="man">man</option>
+        </select>
+        Personnality:
+        <select name="personnality">
+            <option value="considerate">considerate</option>
+            <option value="outgoing">outgoing</option>
+            <option value="reserved">reserved</option>
+            <option value="ambitious">ambitious</option>
+        </select>
+        Import image: <input type="file" name="image" accept="image/*">
+        
+        <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
+        <button type='submit'>Create mii</button>
+    </form>
+</body>
+</html>
