@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TomoDachImac</title>
+    <link rel="stylesheet" href="../static/style/style.css">
 </head>
 <body>
-    <h1>Connexion</h1>
+    <div class="logo">
+        <img src="../static/style/assets/logo_tomodachimac.png" alt="TomoDachImac">
+    </div>
+
+    <div class="carte">
      {% if erreur %}
         <p style="color:red">{{ erreur }}</p>
     {% endif %}
+
+    <h2>Connexion</h2>
     <form action="/connexion", method="POST">
-        Pseudo: <input type="text" name="pseudo">
-        Mot de passe: <input type="password" name="mdp">
-        <button type='submit'>Se connecter</button>
+        <div class="champ">
+            <label>Identifiant</label>
+            <input type="text" name="pseudo">
+        </div>
+        <div class="champ" style="margin-top: 10px;">
+            <label>mdp</label>
+            <input type="password" name="mdp">
+        </div>
+        <div style="margin-top:18px;">
+            <button type="submit" class="boutton">Se connecter</button>
+        </div>
     </form>
 
-    <p>pas de compte?</p>
-    <h1>Inscription</h1>
-     {% if erreur %}
-        <p style="color:red">{{ erreur }}</p>
-    {% endif %}
-    <form action="/inscription", method="POST">
-        Pseudo: <input type="text" name="pseudo">
-        Mot de passe: <input type="password" name="mdp">
-        <button type='submit'>S'inscrire</button>
-    </form>
+    <hr class="separateur">
+    <h2>Inscription</h2>
+        <form action="/inscription" method="POST">
+            <div class="champ">
+                <label>Identifiant</label>
+                <input type="text" name="pseudo" required>
+            </div>
+            <div class="champ" style="margin-top:10px;">
+                <label>mdp</label>
+                <input type="password" name="mdp" required>
+            </div>
+            <div style="margin-top:18px;">
+                <button type="submit" class="boutton">S'inscrire</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
