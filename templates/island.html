@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island</title>
+</head>
+<body>
+    <h1>{{islandName}}</h1>
+    <p>Average note: {{avgNote}}</p>
+    <p>Number of Miis: {{nbMiis}}</p>
+    
+    <div class="miis-container">
+        {% for mii in IslandMiis %}
+            <div class="mii-card">
+                <img src="{{mii.image}}" alt="{{mii.name}}">
+                <p>{{mii.name}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
