@@ -13,7 +13,7 @@
 
     {% if iles %}
     {% for ile in iles %}
-    <p>{{ ile['nom_ile'] }}</p>
+    <a href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
     {% endfor %}
     
     <p><a href="/create_island">Ajouter une nouvelle île</a></p>

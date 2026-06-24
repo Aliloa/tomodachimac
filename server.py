@@ -4,6 +4,7 @@ import models.db as db
 import models.mii as mii
 import models.users as users
 import models.island as island
+import models.note as note
 import os
 from dotenv import load_dotenv
 
@@ -56,6 +57,16 @@ def add_island():
         return render_template('create_island.html')
     id_compte = session['user']['id_compte']
     island.addIsland(name, id_compte)
+    return redirect('/profile')
+
+@server.route('/rate_island/<int:id_ile>', methods=['GET'])
+def display_rate_isalnd(id_ile):
+    return render_template('rate_island.html', id_ile=id_ile)
+
+@server.route('/rate_island/<int:id_ile>', methods=['POST'])
+def add_rate(id_ile):
+    rate = request.form['note']
+    note.addNote(rate, id_ile)
     return redirect('/profile')
 
 #pour voir le lien du serveur
