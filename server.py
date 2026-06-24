@@ -74,6 +74,39 @@ def display_all_islands():
     ile = island.getAllIslands()
     return render_template('all_islands.html', ile=ile)
 
+@server.route('/island', methods=['GET'])
+def showIsland():
+    islandName = request.args.get('nom_ile') # getting island name
+
+    idUser = session['user']['id_compte'] # getting user id
+    idIsland = island.getAllIslandInformation(islandName)['id_island'] # getting island ID
+    
+    nbMiis = mii.CountAllIslandMiis(idIsland) # this function returns a number directly, no dictionnary
+    avgNote = note.getAverageIslandNote(idIsland)
+    IslandMiis = mii.getAllUserIslandMiis(idIsland) # gets images and names of miis
+
+    return render_template('island.html', islandName=islandName, avgNote=avgNote, nbMiis=nbMiis, IslandMiis =IslandMiis)
+
+@server.route('/create_mii', methods=['POST'])
+def create_mii():
+    # all mii creation informations (user input)
+    name = request.form['name']
+    age = request.form['age']
+    sex = request.form['sex']
+    personnality = request.form['personnality']
+    image = request.files['image']
+
+    # information for db :
+    idUser = session['user']['id_compte']
+    idIsland = request.form['id_ile']
+
+    if image and image.filename != '':
+        image.save(f"static/miis/{image.filename}") # saving the image the user imported
+
+    mii.createMii(name, sex, age, personnality, image, idUser, idIsland)
+
+    return render_template('create_mii.html')
+
 #pour voir le lien du serveur
 if __name__=="__main__":
     server.run(debug=True)
