@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Connexion</h1>
      {% if erreur %}
         <p style="color:red">{{ erreur }}</p>
     {% endif %}
@@ -13,6 +14,17 @@
         Pseudo: <input type="text" name="pseudo">
         Mot de passe: <input type="password" name="mdp">
         <button type='submit'>Se connecter</button>
+    </form>
+
+    <p>pas de compte?</p>
+    <h1>Inscription</h1>
+     {% if erreur %}
+        <p style="color:red">{{ erreur }}</p>
+    {% endif %}
+    <form action="/inscription", method="POST">
+        Pseudo: <input type="text" name="pseudo">
+        Mot de passe: <input type="password" name="mdp">
+        <button type='submit'>S'inscrire</button>
     </form>
 </body>
 </html>
