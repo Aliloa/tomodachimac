@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, request, session
 import models.db as db
 import models.mii as mii
 import models.users as users
+import models.island as island
 import os
 from dotenv import load_dotenv
 
@@ -39,8 +40,17 @@ def inscription():
 if __name__=="__main__":
     server.run(debug=True)
 
-@server.route('/create_island')
-def create_island():
-    if 'id_compte' not in session:
-        return redirect('/connexion')
-    return render_template('create_island.html', erreur=None)
+@server.route('/create_island', methods=['POST'])
+def add_island():
+    if 'user' not in session:
+        return redirect('/')
+    name=request.form.get('name','').strip()
+    if not name:
+        return render_template('create_island.html')
+    id_compte = session['user']['id_compte']
+    succes = island.addIsland(name, id_compte)
+    
+    if not succes:
+        return render_template('create_island.html', erreur="Vous avez déjà une île avec ce nom.")
+    
+    return redirect('/profile')

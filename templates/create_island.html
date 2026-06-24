@@ -9,6 +9,7 @@
     <h1>Créer une nouvelle ile</h1>
     <form action='/addIsland' method='POST'>
         <label>Nom de votre île : <input type="text" name="nom" required></label>
+        <input type="text" value="((session ['user'] ['id_compte']))" name="id_comte">
         <button type='submit'>Ajouter</button>
     </form>
 </body>
