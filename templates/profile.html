@@ -6,7 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Vous êtes bien connecté</p>
-    <p>{{user.pseudo}}</p>
+ {% if session['user'] %}
+        <p>Bonjour {{ session['user']['pseudo'] }}</p>
+        <p>Vous n'avez pas d'île <a href="">créer une île</a></p>
+        <p>Nom de l'ile</p>
+        <p><a href="">Ajouter une nouvelle île</a></p>
+    {% else %}
+        <p>Vous n'êtes pas connecté <a href="">se connecter</a></p>
+    {% endif %}
 </body>
 </html>

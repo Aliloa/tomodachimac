@@ -23,7 +23,7 @@ def connexion_post():
     user = users.connexion(pseudo, mdp)
     if user:
         session['user'] = user #sauvegarder l'utilisateur dans la session
-        return render_template('profile.html', user=user)
+        return render_template('profile.html')
     else:
         return render_template('connexion.html', erreur="Identifiants invalides")
 
@@ -34,7 +34,7 @@ def inscription():
     user = users.inscription(pseudo, mdp)
     user = users.connexion(pseudo, mdp)  # on se connecte direct
     session['user'] = user
-    return render_template('profile.html', user=user)
+    return render_template('profile.html')
 
 #pour voir le lien du serveur
 if __name__=="__main__":

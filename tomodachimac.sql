@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 24 juin 2026 à 08:11
+-- Généré le : mer. 24 juin 2026 à 08:34
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `ile` (
 DROP TABLE IF EXISTS `mii`;
 CREATE TABLE IF NOT EXISTS `mii` (
   `id_mii` int NOT NULL AUTO_INCREMENT,
+  `nom_mii` varchar(99) NOT NULL,
   `sexe` enum('M','F') NOT NULL,
   `age` int NOT NULL,
   `image` int DEFAULT NULL,
