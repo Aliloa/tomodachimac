@@ -5,13 +5,11 @@ import models.mii as mii
 import models.users as users
 
 server = Flask(__name__)
-
 # @server.route('/')
 # def accueil():
 #     users = modele.getData()
 #     print(users)
 #     return render_template('liste.html', users=users)
-
 # @server.route('/saisie')
 # def saisie():
 #     return render_template('form.html')
