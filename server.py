@@ -69,6 +69,11 @@ def add_rate(id_ile):
     note.addNote(rate, id_ile)
     return redirect('/profile')
 
+@server.route('/all_islands', methods=['GET'])
+def display_all_islands():
+    ile = island.getAllIslands()
+    return render_template('all_islands.html', ile=ile)
+
 #pour voir le lien du serveur
 if __name__=="__main__":
     server.run(debug=True)
