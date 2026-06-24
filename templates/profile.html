@@ -8,7 +8,7 @@
 <body>
  {% if session['user'] %}
         <p>Bonjour {{ session['user']['pseudo'] }}</p>
-        <p>Vous n'avez pas d'île <a href="">créer une île</a></p>
+        <p>Vous n'avez pas d'île <a href="/create_island">créer une île</a></p>
         <p>Nom de l'ile</p>
         <p><a href="">Ajouter une nouvelle île</a></p>
     {% else %}
