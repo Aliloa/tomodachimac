@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, redirect, request, session
 import models.db as db
 import models.mii as mii
 import models.users as users
@@ -38,3 +38,9 @@ def inscription():
 #pour voir le lien du serveur
 if __name__=="__main__":
     server.run(debug=True)
+
+@server.route('/create_island')
+def create_island():
+    if 'id_compte' not in session:
+        return redirect('/connexion')
+    return render_template('create_island.html', erreur=None)

@@ -2,15 +2,17 @@
 <html>
 
 <head>
-    <title>Formulaire creation de votre ile</title>
+    <title>Island creation</title>
 </head>
 
 <body>
-    <h1>Formulaire creation de votre ile</h1>
-    <form action='/ajout' method='POST'>
-        Nom de votre ile : <input name='nom'>
+    <h1>Créer une nouvelle ile</h1>
+    <form action='/addIsland' method='POST'>
+        <label>Nom de votre île : <input type="text" name="nom" required></label>
         <button type='submit'>Ajouter</button>
     </form>
 </body>
 
+    <a href="/profile">Retour au profil</a>
+</body>
 </html>
