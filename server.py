@@ -74,18 +74,21 @@ def display_all_islands():
     ile = island.getAllIslands()
     return render_template('all_islands.html', ile=ile)
 
-@server.route('/island', methods=['GET'])
-def showIsland():
-    islandName = request.args.get('nom_ile') # getting island name
+@server.route('/island/<int:id_ile>', methods=['GET'])
+def showIsland(id_ile):
+    islandName = island.getIslandById(id_ile)["nom_ile"]
 
     idUser = session['user']['id_compte'] # getting user id
-    idIsland = island.getAllIslandInformation(islandName)['id_island'] # getting island ID
     
-    nbMiis = mii.CountAllIslandMiis(idIsland) # this function returns a number directly, no dictionnary
-    avgNote = note.getAverageIslandNote(idIsland)
-    IslandMiis = mii.getAllUserIslandMiis(idIsland) # gets images and names of miis
+    nbMiis = mii.CountAllIslandMiis(id_ile) # this function returns a number directly, no dictionnary
+    # avgNote = note.getAverageIslandNote(id_ile)
+    IslandMiis = mii.getAllUserIslandMiis(id_ile) # gets images and names of miis
 
-    return render_template('island.html', islandName=islandName, avgNote=avgNote, nbMiis=nbMiis, IslandMiis =IslandMiis)
+    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis =IslandMiis)
+
+@server.route('/create_mii', methods=['GET'])
+def display_mii_creator():
+    return render_template('create_mii.html')
 
 @server.route('/create_mii', methods=['POST'])
 def create_mii():
