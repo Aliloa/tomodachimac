@@ -18,7 +18,10 @@ def connexion():
 
 @server.route('/profile', methods=['GET'])
 def display_profile():
-    return render_template('profile.html')
+    if 'user' not in session:
+        return redirect('/')
+    iles = island.getIslandsByUser(session['user']['id_compte'])
+    return render_template('profile.html', iles=iles)
     
 @server.route('/connexion', methods=['POST'])
 def connexion_post():
@@ -27,7 +30,7 @@ def connexion_post():
     user = users.connexion(pseudo, mdp)
     if user:
         session['user'] = user #sauvegarder l'utilisateur dans la session
-        return render_template('profile.html')
+        return redirect('/profile')
     else:
         return render_template('connexion.html', erreur="Identifiants invalides")
 
@@ -52,6 +55,7 @@ def add_island():
     if not name:
         return render_template('create_island.html')
     id_compte = session['user']['id_compte']
+    island.addIsland(name, id_compte)
     return redirect('/profile')
 
 #pour voir le lien du serveur
