@@ -216,6 +216,15 @@ img:hover {
 img:active {
     opacity: 0.6;
 }
+.note-badge {
+    background-color: var(--jaune_clair);
+    border: 2px solid var(--jaune);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    color: var(--noir_site);
+    white-space: nowrap;
+}
 
 @media screen and (min-width: 809px) {
     .miis-container {
