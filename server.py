@@ -73,6 +73,7 @@ def add_rate(id_ile):
 @server.route('/delete_island/<int:id_ile>', methods=['POST'])
 def delete_island(id_ile):
     island.deleteIslandById(id_ile)
+    #à faire supprimer tous les mii associés
     return redirect('/profile')
 
 @server.route('/rename_island/<int:id_ile>', methods=['POST'])
