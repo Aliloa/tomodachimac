@@ -16,6 +16,9 @@
     {% for ile in iles %}
     <a href="/island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
     <a href="/rate_island/{{ ile['id_ile'] }}">noter {{ ile['nom_ile'] }}</a>
+    <form action="/delete_island/{{ ile['id_ile']}}" method="POST">
+        <button type="submit">Supprimer</button>
+    </form>
 
     {% endfor %}
 
