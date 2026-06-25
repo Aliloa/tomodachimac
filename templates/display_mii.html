@@ -14,37 +14,6 @@
         <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
     </div>
 
-    <div class="miis-informations">
-        <p>Age: {{miiInfo.age}}</p>
-        <p>Sex: {{miiInfo.sexe}}</p>
-        <p>Personnality: {{miiInfo.personnalite}}</p>
-        <p>Member of:</p>
-        {% if familyName %}
-            <a href="/display_mii/{{miiInfo.id_famille}}/{{miiInfo.id_mii}}">
-                <p>{{familyName}} family</p>
-            </a>
-        {% else %}
-            <p>{{miiInfo.nom_mii}} is not part of a family.</p>
-        {% endif %}
-        {%if partnerInfo%}
-            <p>Partner: {{partnerInfo.nom_mii}}</p>
-            <a href="/display_mii/{{partnerInfo.id_mii}}">
-                <img src="{{partnerInfo.image}}" alt="{{partnerInfo.nom_mii}}">
-            </a>
-        {%else%}
-            <p>{{miiInfo.nom_mii}} has no partner for the moment.</p>
-        {%endif%}
-        {%if crushInfo%}
-            <p>Crush: {{crushInfo.nom_mii}}</p>
-            <a href="/display_mii/{{crushInfo.id_mii}}">
-                <img src="{{crushInfo.image}}" alt="{{crushInfo.nom_mii}}">
-            </a>
-        {%else%}
-            <p>{{miiInfo.nom_mii}} has no crush for the moment.</p>
-        {%endif%}
-
-    </div>
-
     <div class="carte-large">
         <div class="mii-header">
             <img class="mii-avatar" src="/static/miis/{{ miiInfo['image'] }}" alt="{{ miiInfo['nom_mii'] }}">
@@ -61,10 +30,11 @@
         <hr class="separateur">
 
         {% if familyName %}
-        <div class="section-bloc">
-            <h3 class="section-title">Family</h3>
-            <a class="badge-ile" href="/family/{{ miiInfo['id_famille'] }}">{{ familyName }} family</a>
-        </div>
+            <a href="/display_mii/{{miiInfo.id_famille}}/{{miiInfo.id_mii}}">
+                <p>Member of {{familyName}} family</p>
+            </a>
+        {% else %}
+            <p>{{miiInfo.nom_mii}} is not part of a family.</p>
         {% endif %}
 
         <div class="section-bloc">

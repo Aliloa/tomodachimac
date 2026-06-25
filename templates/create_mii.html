@@ -13,6 +13,28 @@
         <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
     </div>
 
+    <h1>create new mii</h1>
+    {% if erreur %}
+        <p style="color:red">{{erreur}}</p>
+    {% endif %}
+
+    <form action="/create_mii/{{id_ile}}" method="POST" enctype="multipart/form-data">
+        Name: <input type="text" name="name">
+        Age: <input type="number" name="age">
+        Sex:
+        <select name="sex">
+            <option value="woman">woman</option>
+            <option value="man">man</option>
+        </select>
+        Personnality:
+        <select name="personnality">
+            <option value="considerate">considerate</option>
+            <option value="outgoing">outgoing</option>
+            <option value="reserved">reserved</option>
+            <option value="ambitious">ambitious</option>
+        </select>
+        Import mii image: <input type="file" name="image" accept="image/*">
+
         Does your mii have a crush on an existing mii on {{islandName}} island ?
         <select name="crush_choice" class="user_choice">
                 {% for mii in allIslandMiis%}
@@ -36,6 +58,10 @@
             {% endfor %}
             <option value="none">no</option>
         </select>
+
+        If not, do you want to create a family for them on {{islandName}} island ?
+
+        Enter name or nothing if not: <input type="text" name="family_name">
         
         Who's their father on {{islandName}} island ?
         <select name="father_choice" class="user_choice">
@@ -51,7 +77,8 @@
                 <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
             {% endfor %}
             <option value="none">none</option>
-        </select>        
+        </select>
+        
 
         <input type="hidden" name="id_ile" value="{{id_ile}}"> <!-- hidden input to get id_ile -->
         <button type='submit'>Create mii</button>

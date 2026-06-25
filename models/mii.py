@@ -25,8 +25,10 @@ def deleteMiisByIslandId(id_ile):
 
 def deleteMiiById(id_mii):
     mycursor = mydb.cursor(dictionary=True)
+
     mycursor.execute("DELETE FROM mii WHERE id_mii = %s", (id_mii,))
     mydb.commit()
+    
     mycursor.close()
     
 # for a single mii :

@@ -110,7 +110,7 @@ def showIsland(id_ile):
     nbMiis = mii.CountAllIslandMiis(id_ile) # this function returns a number directly, no dictionnary
     avgNote = note.getAverageIslandNote(id_ile)
     IslandMiis = mii.getAllIslandMiis(id_ile) # gets images and names of miis
-    owner = users.getUserByIslandId(id_ile)
+    owner = users.getUserByIslandId(id_ile)['pseudo']
 
     return render_template('island.html',ile=ile, avgNote=avgNote, nbMiis=nbMiis, IslandMiis=IslandMiis,owner=owner )
 
@@ -119,7 +119,7 @@ def display_mii_creator(id_ile):
     # information for db :
     idUser = session['user']['id_compte']
 
-    allIslandMiis = mii.getAllUserIslandMiis(id_ile)
+    allIslandMiis = mii.getAllIslandMiis(id_ile)
     allIslandFamilies = family.getFamiliesByIsland(id_ile)
     islandName = island.getIslandById(id_ile)['nom_ile']
 
@@ -133,6 +133,7 @@ def create_mii(id_ile):
     sex = request.form['sex']
     personnality = request.form['personnality']
     image = request.files['image']
+
     # crush :
     crush_choice = request.form['crush_choice']
     if crush_choice != 'none':
@@ -159,11 +160,13 @@ def create_mii(id_ile):
         idMother = None
     # family name :
     family_choice = request.form['family_choice']
+    familyName = request.form['family_name']
     if family_choice != 'none':
         idFamily = int(family_choice)
+    elif familyName:
+        idFamily = family.createFamily(familyName)  # returns new id_famille via cursor.lastrowid
     else:
         idFamily = None
-
 
     # information for db :
     idUser = session['user']['id_compte']
@@ -172,6 +175,9 @@ def create_mii(id_ile):
     if image and image.filename != '':
         imageFilename = image.filename
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
+
+    if familyName:
+        family.createFamily(familyName)
 
     mii.createMii(name, sex, age, personnality, imageFilename, idUser, id_ile, idCrush, idPartner, idFamily, idFather, idMother)
 
@@ -220,9 +226,13 @@ def display_familly(id_mii, id_family):
 def delete_mii(id_mii):
     #sécurité double vérification avant de supprimer
     selectedMii = mii.getMiiById(id_mii)
-    if selectedMii['id_compte'] != session['user']['id_compte']:
+    idUser = users.getUserByIslandId(selectedMii['id_ile'])['id_compte']
+
+    if idUser != session['user']['id_compte']:
         return redirect('/profile')  # ou retourner une erreur 403
+    
     mii.deleteMiiById(id_mii)
+
     return redirect('/profile')
 
 #pour voir le lien du serveur
