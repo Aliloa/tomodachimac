@@ -10,13 +10,13 @@
 </head>
 
 <body>
-        <div class="logo">
+    <div class="logo">
         <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
     </div>
 
-<div class="carte-large">
+    <div class="carte-large">
         <h1>{{ ile['nom_ile'] }}</h1>
-                <div class="stats-ile">
+        <div class="stats-ile">
             <span class="stat-badge"> {{ avgNote }} / 5</span>
             <span class="stat-badge"> {{ nbMiis }} Miis</span>
         </div>
@@ -41,6 +41,11 @@
         </div>
         {% endif %}
         </div>
+        {% if session['user']['id_compte'] == ile['id_compte'] %}
+        <form action="/delete_island/{{ ile['id_ile'] }}" method="POST">
+            <button type="submit">Supprimer l'île</button>
+        </form>
+        {% endif %}
         <p class="lien-secondaire"><a href="/profile">Back to profile</a></p>
     </div>
 </body>

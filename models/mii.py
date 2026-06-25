@@ -5,6 +5,11 @@ def getAllIslandMiis(id_ile):
     mycursor.execute("SELECT * FROM mii WHERE id_ile = %s", (id_ile,))
     return mycursor.fetchall()
 
+def getMiiById(id_mii):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM mii WHERE id_mii = %s", (id_mii,))
+    return mycursor.fetchone()
+
 def CountAllIslandMiis(idIsland): # number of miis on an island
     cursor = mydb.cursor(dictionary=True)
 
@@ -15,6 +20,12 @@ def CountAllIslandMiis(idIsland): # number of miis on an island
 def deleteMiisByIslandId(id_ile):
     mycursor = mydb.cursor(dictionary=True)
     mycursor.execute("DELETE FROM mii WHERE id_ile = %s", (id_ile,))
+    mydb.commit()
+    mycursor.close()
+
+def deleteMiiById(id_mii):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("DELETE FROM mii WHERE id_mii = %s", (id_mii,))
     mydb.commit()
     mycursor.close()
     

@@ -146,10 +146,14 @@ def create_mii(id_ile):
 @server.route('/display_mii/<int:id_mii>', methods=['GET'])
 def display_mii(id_mii):
     miiInfo = mii.getAllMiiInformations(id_mii)
-    crushInfo = mii.getMiiCrushInformations(id_mii)
-    familyName = family.getFamilyName(miiInfo['id_famille'])
-    partnerInfo = mii.getMiiPartnerInformations(id_mii)
-    return render_template('display_mii.html', miiInfo=miiInfo, crushInfo=crushInfo, partnerInfo=partnerInfo, familyName=familyName)
+    return render_template('display_mii.html',
+        miiInfo=miiInfo,
+        ile=island.getIslandById(miiInfo['id_ile']),
+        crushInfo=mii.getMiiCrushInformations(id_mii),
+        partnerInfo=mii.getMiiPartnerInformations(id_mii),
+        familyName=family.getFamilyName(miiInfo['id_famille']),
+        IslandMiis=mii.getAllIslandMiis(miiInfo['id_ile'])
+    )
 
 @server.route('/display_mii/<int:id_family>/<int:id_mii>', methods=['GET'])
 def display_familly(id_mii, id_family):
@@ -175,6 +179,14 @@ def display_familly(id_mii, id_family):
 
     return render_template('family.html', nbMembers=nbMembers, otherMembers=otherMembers, fatherInfo=fatherInfo, motherInfo=motherInfo, siblingsInfo=siblingsInfo)
 
+@server.route('/delete_mii/<int:id_mii>', methods=['POST'])
+def delete_mii(id_mii):
+    #sécurité double vérification avant de supprimer
+    selectedMii = mii.getMiiById(id_mii)
+    if selectedMii['id_compte'] != session['user']['id_compte']:
+        return redirect('/profile')  # ou retourner une erreur 403
+    mii.deleteMiiById(id_mii)
+    return redirect('/profile')
 
 #pour voir le lien du serveur
 if __name__=="__main__":
