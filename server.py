@@ -106,11 +106,11 @@ def create_mii(id_ile):
     if image and image.filename != '':
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
 
-    allMiis = mii.getAllUserIslandMiis(idUser, id_ile)
+    allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
 
     mii.createMii(name, sex, age, personnality, image, idUser, id_ile)
 
-    return render_template('create_mii.html', IdIsland=id_ile, allMiis=allMiis)
+    return render_template('create_mii.html', IdIsland=id_ile, allIslandMiis=allIslandMiis)
 
 @server.route('/display_mii/<int:id_mii>', methods=['GET'])
 def display_mii(id_mii):
