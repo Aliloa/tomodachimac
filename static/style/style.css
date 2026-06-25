@@ -125,3 +125,37 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     color: var(--bleu_fonce);
     text-decoration: underline;
 }
+
+.miis-container{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 40px;
+    justify-content: center;
+    min-width: 200px;
+}
+
+img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    transition: 0.2s;
+}
+
+img:hover {
+    scale: 105%;
+}
+
+img:active {
+    opacity: 0.6;
+}
+
+@media screen and (min-width: 809px) {
+    .miis-container {
+        grid-template-columns: 200px 200px 200px;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .miis-container {
+        grid-template-columns: 200px 200px 200px 200px 200px;
+    }
+}

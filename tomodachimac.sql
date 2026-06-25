@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 24 juin 2026 à 11:56
+-- Généré le : jeu. 25 juin 2026 à 09:30
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -76,8 +76,7 @@ CREATE TABLE IF NOT EXISTS `ile` (
 --
 
 INSERT INTO `ile` (`id_ile`, `nom_ile`, `id_compte`, `note`) VALUES
-(1, 'ile de lebron', 1, 0),
-(2, 'seonde ile de lebron', 1, 0),
+(2, 'seonde ile de lebronnn yeahhh', 1, 0),
 (3, 'Tel Aviv', 2, 0);
 
 -- --------------------------------------------------------
@@ -91,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `mii` (
   `id_mii` int NOT NULL AUTO_INCREMENT,
   `nom_mii` varchar(99) NOT NULL,
   `age` int NOT NULL,
-  `image` int DEFAULT NULL,
+  `image` text,
   `id_ile` int NOT NULL COMMENT 'cle etrangere',
   `sexe` text NOT NULL,
   `personalite` text NOT NULL,
@@ -101,7 +100,15 @@ CREATE TABLE IF NOT EXISTS `mii` (
   `id_partenaire` int DEFAULT NULL COMMENT '#',
   `id_crush` int DEFAULT NULL COMMENT '#',
   PRIMARY KEY (`id_mii`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `mii`
+--
+
+INSERT INTO `mii` (`id_mii`, `nom_mii`, `age`, `image`, `id_ile`, `sexe`, `personalite`, `if_famille`, `id_pere`, `id_mere`, `id_partenaire`, `id_crush`) VALUES
+(1, 'lou', 19, NULL, 2, 'feminin', 'Extraverti', NULL, NULL, NULL, NULL, NULL),
+(2, 'Denise', 21, NULL, 2, 'F', 'Timide', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `note` (
   `note` int NOT NULL,
   `id_ile` int NOT NULL COMMENT 'cle etrangere',
   PRIMARY KEY (`id_note`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `note`
@@ -123,7 +130,9 @@ CREATE TABLE IF NOT EXISTS `note` (
 
 INSERT INTO `note` (`id_note`, `note`, `id_ile`) VALUES
 (1, 3, 2),
-(2, 0, 1);
+(2, 0, 1),
+(3, 3, 3),
+(4, 5, 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
