@@ -5,19 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style/style.css">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
+    <title>Profil</title>
 </head>
 
 <body>
+    <div class="carte">
     {% if session['user'] %}
     <p>Bonjour {{ session['user']['pseudo'] }}</p>
-
+    
     {% if iles %}
     {% for ile in iles %}
-    <a href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
+    <a class="badge-ile" href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
     {% endfor %}
-    
-    <p><a href="/create_island">Ajouter une nouvelle île</a></p>
+    <hr class="separateur">
+    <p><a class="lien-secondaire" href="/create_island">Ajouter une nouvelle île</a></p>
     {% else %}
     <p>Vous n'avez pas d'île <a href="/create_island">créer une île</a></p>
     {% endif %}
@@ -25,6 +27,7 @@
     {% else %}
     <p>Vous n'êtes pas connecté <a href="">se connecter</a></p>
     {% endif %}
+    </div>
 </body>
 
 </html>

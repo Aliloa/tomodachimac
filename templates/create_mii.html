@@ -6,6 +6,7 @@
     <title>Create Mii</title>
 </head>
 <body>
+    <div class="carte">
     <h1>create new mii</h1>
     {% if erreur %}
         <p style="color:red">{{erreur}}</p>
@@ -30,5 +31,6 @@
         <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
         <button type='submit'>Create mii</button>
     </form>
+    </div>
 </body>
 </html>
