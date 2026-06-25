@@ -19,7 +19,7 @@
     --bleu_fonce: #768DBA;
 }
 
-/* ── PAGE ── */
+
 body {
     min-height: 100vh;
     background-color: var(--jaune);
@@ -47,7 +47,7 @@ body::after {
 body::before { top: 0; border-radius: 0 0 60% 60% / 0 0 40px 40px; }
 body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
 
-/* ── LOGO ── */
+
 .logo {
     position: relative;
     z-index: 1;
@@ -61,7 +61,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     display: block;
 }
 
-/* ── CARTE ── */
+
 .carte {
     position: relative;
     z-index: 1;
@@ -84,7 +84,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     margin-bottom: 4px;
 }
 
-/* ── FORMULAIRE ── */
+
 .champ {
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     color: var(--blanc_site);
 }
 
-/* ── BOUTON ── */
+
 .boutton {
     display: flex;
     justify-content: center;
@@ -147,14 +147,13 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     box-shadow: 0 1px 0 var(--bleu_fonce);
 }
 
-/* ── ERREUR ── */
+
 .erreur {
     color: var(--rouge_site);
     font-size: 0.85rem;
     text-align: center;
 }
 
-/* ── LIEN DISCRET ── */
 .lien-secondaire {
     text-align: center;
     font-size: 0.8rem;
@@ -166,14 +165,13 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     text-decoration: underline;
 }
 
-/* ── SÉPARATEUR ── */
 .separateur {
     border: none;
     border-top: 1.5px solid var(--bleu);
     margin: 4px 0;
 }
 
-/* ── NOM ILE (badge) ── */
+
 .badge-ile {
     background-color: var(--jaune_clair);
     border-radius: 12px;
@@ -185,7 +183,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     text-decoration: none;
 }
 
-/* ── PROFILE ── */
+
 .ile-bloc {
     display: flex;
     flex-direction: column;
@@ -254,7 +252,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     flex-wrap: wrap;
 }
 
-/* ── NOTE BADGE ── */
+
 .note-badge {
     background-color: var(--jaune_clair);
     border: 2px solid var(--jaune);
@@ -265,7 +263,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     white-space: nowrap;
 }
 
-/* ── CARTE LARGE (island, create_mii) ── */
+
 .carte-large {
     position: relative;
     z-index: 1;
@@ -281,7 +279,6 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     gap: 16px;
 }
 
-/* ── GRILLE MIIS ── */
 .miis-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -323,7 +320,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     gap: 6px;
 }
 
-/* ── STATS ILE ── */
+
 .stats-ile {
     display: flex;
     gap: 12px;
@@ -337,7 +334,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     color: var(--noir_site);
 }
 
-/* ── FORMULAIRE CREATE MII ── */
+
 .form-mii {
     display: flex;
     flex-direction: column;
