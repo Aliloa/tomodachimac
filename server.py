@@ -122,6 +122,7 @@ def create_mii(id_ile):
     # information for db :
     idUser = session['user']['id_compte']
 
+    imageFilename = None
     if image and image.filename != '':
         imageFilename = image.filename
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
@@ -133,12 +134,6 @@ def create_mii(id_ile):
 @server.route('/display_mii/<int:id_mii>', methods=['GET'])
 def display_mii(id_mii):
     miiInfo = mii.getAllMiiInformations(id_mii)
-    name =  mii.getAllMiiInformations(id_mii)['nom_mii']
-    sex =  mii.getAllMiiInformations(id_mii)['sex']
-    age =  mii.getAllMiiInformations(id_mii)['age']
-    personnality =  mii.getAllMiiInformations(id_mii)['personnalite']
-    image =  mii.getAllMiiInformations(id_mii)['image']
-
     crushInfo = mii.getMiiCrushInformations(id_mii)
     familyName = family.getFamilyName(miiInfo['id_famille'])
     partnerInfo = mii.getMiiPartnerInformations(id_mii)

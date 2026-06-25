@@ -48,5 +48,5 @@ def getMiiPartnerInformations(idMii):
 def createMii(name, sex, age, personnality, image, idUser, idIsland):
     cursor = mydb.cursor(dictionary=True)
 
-    cursor.execute("INSERT INTO mii (nom_mii, sexe, age, personnalite, image) VALUES (%s, %s, %s, %s,) JOIN ile ON mii.id_ile = ile.id_ile JOIN compte ON ile.id_compte = compte.id_compte WHERE id_ile = %s AND id_compte = %s", (name, sex, age, personnality, image, idIsland, idUser))
+    cursor.execute("INSERT INTO mii (nom_mii, sexe, age, personnalite, image, id_ile) VALUES (%s, %s, %s, %s, %s, %s)", (name, sex, age, personnality, image, idIsland))
     mydb.commit()
