@@ -13,3 +13,8 @@ def inscription(pseudo, mdp):
     mycursor.execute("INSERT INTO compte (pseudo, mdp) VALUES (%s, %s)", (pseudo, mdp_hashe))
     mydb.commit()
     mycursor.close()
+
+def getUserByPseudo(pseudo):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM compte WHERE pseudo = %s", (pseudo,))
+    return mycursor.fetchone()

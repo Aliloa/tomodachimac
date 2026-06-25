@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,38 @@
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
+
 <body>
     <header>
-    <div class="logo">
-        <img src="../static/style/assets/logo_tomodachimac.png" alt="TomoDachImac">
-    </div>
+        <div class="logo">
+            <img src="../static/style/assets/logo_tomodachimac.png" alt="TomoDachImac">
+        </div>
     </header>
     <div class="carte">
-     {% if erreur %}
-        <p style="color:red">{{ erreur }}</p>
-    {% endif %}
+        {% if erreurconnexion %}
+        <p style="color:red">{{ erreurconnexion }}</p>
+        {% endif %}
 
-    <h2>Connexion</h2>
-    <form action="/connexion", method="POST">
-        <div class="champ">
-            <label>Identifiant</label>
-            <input type="text" name="pseudo">
-        </div>
-        <div class="champ" style="margin-top: 10px;">
-            <label>mdp</label>
-            <input type="password" name="mdp">
-        </div>
-        <div style="margin-top:18px;">
-            <button type="submit" class="boutton">Se connecter</button>
-        </div>
-    </form>
+        <h2>Connexion</h2>
+        <form action="/connexion" , method="POST">
+            <div class="champ">
+                <label>Identifiant</label>
+                <input type="text" name="pseudo">
+            </div>
+            <div class="champ" style="margin-top: 10px;">
+                <label>mdp</label>
+                <input type="password" name="mdp">
+            </div>
+            <div style="margin-top:18px;">
+                <button type="submit" class="boutton">Se connecter</button>
+            </div>
+        </form>
 
-    <hr class="separateur">
-    <h2>Inscription</h2>
+        <hr class="separateur">
+        <h2>Inscription</h2>
+        {% if erreurinscription %}
+        <p style="color:red">{{ erreurinscription }}</p>
+        {% endif %}
         <form action="/inscription" method="POST">
             <div class="champ">
                 <label>Identifiant</label>
@@ -50,4 +55,5 @@
         </form>
     </div>
 </body>
+
 </html>

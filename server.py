@@ -34,16 +34,24 @@ def connexion_post():
         session['user'] = user #sauvegarder l'utilisateur dans la session
         return redirect('/profile')
     else:
-        return render_template('connexion.html', erreur="Identifiants invalides")
+        return render_template('connexion.html', erreurconnexion="Identifiants invalides")
 
 @server.route('/inscription', methods=['POST'])
 def inscription():
     pseudo = request.form['pseudo']
     mdp = request.form['mdp']
+    existingUser = users.getUserByPseudo(pseudo)
+    if existingUser:
+        return render_template('connexion.html', erreurinscription="Ce pseudo est déjà pris")
     user = users.inscription(pseudo, mdp)
     user = users.connexion(pseudo, mdp)  # on se connecte direct
     session['user'] = user
     return render_template('profile.html')
+
+@server.route('/deconnexion', methods=['GET'])
+def deconnexion():
+    session.clear()
+    return redirect('/')
 
 @server.route('/create_island', methods=['GET'])
 def display_island_form():
@@ -72,8 +80,13 @@ def add_rate(id_ile):
 
 @server.route('/delete_island/<int:id_ile>', methods=['POST'])
 def delete_island(id_ile):
+    #sécurité double vérification avant de supprimer
+    ile = island.getIslandById(id_ile)
+    if ile['id_compte'] != session['user']['id_compte']:
+        return redirect('/profile')  # ou retourner une erreur 403
+    # supprimer dabord tous les mii associés
+    mii.deleteMiisByIslandId(id_ile)
     island.deleteIslandById(id_ile)
-    #à faire supprimer tous les mii associés
     return redirect('/profile')
 
 @server.route('/rename_island/<int:id_ile>', methods=['POST'])
@@ -91,22 +104,21 @@ def display_all_islands():
 
 @server.route('/island/<int:id_ile>', methods=['GET'])
 def showIsland(id_ile):
-    islandName = island.getIslandById(id_ile)["nom_ile"]
-
+    ile = island.getIslandById(id_ile)
     idUser = session['user']['id_compte'] # getting user id
     
     nbMiis = mii.CountAllIslandMiis(id_ile) # this function returns a number directly, no dictionnary
-    # avgNote = note.getAverageIslandNote(id_ile)
-    IslandMiis = mii.getAllUserIslandMiis(idUser, id_ile) # gets images and names of miis
+    avgNote = note.getAverageIslandNote(id_ile)
+    IslandMiis = mii.getAllIslandMiis(id_ile) # gets images and names of miis
 
-    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis=IslandMiis, id_ile=id_ile)
+    return render_template('island.html',ile=ile, avgNote=avgNote, nbMiis=nbMiis, IslandMiis=IslandMiis, )
 
 @server.route('/create_mii/<int:id_ile>', methods=['GET'])
 def display_mii_creator(id_ile):
     # information for db :
     idUser = session['user']['id_compte']
 
-    allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
+    allIslandMiis = mii.getAllIslandMiis(id_ile)
 
     return render_template('create_mii.html', id_ile=id_ile, allIslandMiis=allIslandMiis)
 
@@ -137,7 +149,6 @@ def display_mii(id_mii):
     crushInfo = mii.getMiiCrushInformations(id_mii)
     familyName = family.getFamilyName(miiInfo['id_famille'])
     partnerInfo = mii.getMiiPartnerInformations(id_mii)
-
     return render_template('display_mii.html', miiInfo=miiInfo, crushInfo=crushInfo, partnerInfo=partnerInfo, familyName=familyName)
 
 @server.route('/display_mii/<int:id_family>/<int:id_mii>', methods=['GET'])

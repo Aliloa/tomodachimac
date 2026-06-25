@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,29 +8,33 @@
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
+
 <body>
     <div class="carte">
-    <h1>{{islandName}}</h1>
-    <p>Average note: {{avgNote}}</p>
-    <p>Number of Miis: {{nbMiis}}</p>
+        <h1>{{ ile['nom_ile'] }}</h1>
+        <p>Average note: {{ avgNote }}</p>
+        <p>Number of Miis: {{ nbMiis }}</p>
 
-    <div class="miis-container">
-        {% for mii in IslandMiis %}
+        <div class="miis-container">
+            {% for mii in IslandMiis %}
             <div class="mii-card">
-                <a href="/display_mii/{{mii.id_mii}}">
-                    <img src="/static/miis/{{mii.image}}" alt="{{mii.nom_mii}}">
+                <a href="/display_mii/{{ mii['id_mii'] }}">
+                    <img src="/static/miis/{{ mii['image'] }}" alt="{{ mii['nom_mii'] }}">
                 </a>
-                <p>{{mii.nom_mii}}</p>
+                <p>{{ mii['nom_mii'] }}</p>
             </div>
-        {% endfor %}
+            {% endfor %}
 
-        <div class="mii-card">
-            <a href="/create_mii/{{id_ile}}">
-                Create new mii
-                <img src="../miis/create_mii.png" alt="mii creation">
-            </a>
+            {% if session['user']['id_compte'] == ile['id_compte'] %}
+            <div class="mii-card">
+                <a href="/create_mii/{{ ile['id_ile'] }}">
+                    Create new mii
+                    <img src="../miis/create_mii.png" alt="mii creation">
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
-    </div>
 </body>
+
 </html>
