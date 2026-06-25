@@ -11,23 +11,32 @@
 
 <body>
     <div class="carte">
-    {% if session['user'] %}
+        {% if session['user'] %}
+
         <p>Bonjour {{session['user']['pseudo']}}</p>
-        
+
         {% if iles %}
-            {% for ile in iles %}
-                <a class="badge-ile" href="/island/{{ile['id_ile']}}">{{ile['nom_ile']}}</a>
-            {% endfor %}
-            <hr class="separateur">
-            <p><a class="lien-secondaire" href="/create_island">Ajouter une nouvelle île</a></p>
-            <p><a href="/all_islands">Voir les iles de tout le monde</a></p>
+        {% for ile in iles %}
+        <form action="/rename_island/{{ ile['id_ile']}}" method="POST">
+            <input type="text" value="{{ile['nom_ile']}}" name="nom">
+            <button type="submit">Renommer</button>
+        </form>
+        <a class="badge-ile" href="/island/{{ile['id_ile']}}">voir</a>
+        <a href="/rate_island/{{ ile['id_ile'] }}">noter {{ ile['nom_ile'] }}</a>
+        <form action="/delete_island/{{ ile['id_ile']}}" method="POST">
+            <button type="submit">Supprimer</button>
+        </form>
+        {% endfor %}
+        <hr class="separateur">
+        <p><a class="lien-secondaire" href="/create_island">Ajouter une nouvelle île</a></p>
+        <p><a href="/all_islands">Voir les iles de tout le monde</a></p>
         {% else %}
-            <p>Vous n'avez pas d'île <a href="/create_island">créer une île</a></p>
+        <p>Vous n'avez pas d'île <a href="/create_island">créer une île</a></p>
         {% endif %}
 
-    {% else %}
+        {% else %}
         <p>Vous n'êtes pas connecté <a href="">se connecter</a></p>
-    {% endif %}
+        {% endif %}
     </div>
 </body>
 

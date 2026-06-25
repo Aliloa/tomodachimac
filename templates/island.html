@@ -8,19 +8,25 @@
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
 <body>
-    <div class="carte">
     <h1>{{islandName}}</h1>
     <p>Average note: {{avgNote}}</p>
     <p>Number of Miis: {{nbMiis}}</p>
-    
-        <div class="miis-container">
-            {% for mii in IslandMiis %}
-                <div class="mii-card">
-                    <img src="../static/style/assets/logo_tomodachimac.png" alt="TomoDachImac">
-                    <!--img src="{{mii.image}}" alt="{{mii.nom_mii}}"-->
-                    <p>{{mii.name}}</p>
-                </div>
-            {% endfor %}
+
+    <div class="miis-container">
+        {% for mii in IslandMiis %}
+            <div class="mii-card">
+                <a href="/display_mii/{{mii.id_mii}}">
+                    <img src="{{mii.image}}" alt="{{mii.nom_mii}}">
+                </a>
+                <p>{{mii.nom_mii}}</p>
+            </div>
+        {% endfor %}
+
+        <p>Create new mii</p>
+        <div class="mii-card">
+            <a href="/create_mii/{{id_ile}}">
+                <img src="../miis/create_mii.png" alt="mii creation">
+            </a>
         </div>
     </div>
 </body>

@@ -70,10 +70,23 @@ def add_rate(id_ile):
     note.addNote(rate, id_ile)
     return redirect('/profile')
 
+@server.route('/delete_island/<int:id_ile>', methods=['POST'])
+def delete_island(id_ile):
+    island.deleteIslandById(id_ile)
+    return redirect('/profile')
+
+@server.route('/rename_island/<int:id_ile>', methods=['POST'])
+def rename_island(id_ile):
+    new_name = request.form['nom']
+    island.renameIsland(id_ile, new_name)
+    return redirect('/profile')
+
 @server.route('/all_islands', methods=['GET'])
 def display_all_islands():
-    ile = island.getAllIslands()
-    return render_template('all_islands.html', ile=ile)
+    iles = island.getAllIslands()
+    for ile in iles:
+        ile['moyenne'] = note.getAverageIslandNote(ile['id_ile'])
+    return render_template('all_islands.html', iles=iles)
 
 @server.route('/island/<int:id_ile>', methods=['GET'])
 def showIsland(id_ile):
@@ -85,11 +98,11 @@ def showIsland(id_ile):
     # avgNote = note.getAverageIslandNote(id_ile)
     IslandMiis = mii.getAllUserIslandMiis(idUser, id_ile) # gets images and names of miis
 
-    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis=IslandMiis)
+    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis=IslandMiis, id_ile=id_ile)
 
 @server.route('/create_mii/<int:id_ile>', methods=['GET'])
 def display_mii_creator(id_ile):
-    return render_template('create_mii.html')
+    return render_template('create_mii.html', id_ile=id_ile)
 
 @server.route('/create_mii/<int:id_ile>', methods=['POST'])
 def create_mii(id_ile):
