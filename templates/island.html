@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island</title>
+    <title>{{ islandName }} – TomoDachImac</title>
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
 <body>
-    <div class="carte">
-    <h1>{{islandName}}</h1>
-    <p>Average note: {{avgNote}}</p>
-    <p>Number of Miis: {{nbMiis}}</p>
-
-    <div class="miis-container">
-        {% for mii in IslandMiis %}
-            <div class="mii-card">
-                <a href="/display_mii/{{mii.id_mii}}">
-                    <img src="/static/miis/{{mii.image}}" alt="{{mii.nom_mii}}">
-                </a>
-                <p>{{mii.nom_mii}}</p>
-            </div>
-        {% endfor %}
-
-        <div class="mii-card">
-            <a href="/create_mii/{{id_ile}}">
-                Create new mii
-                <img src="../miis/create_mii.png" alt="mii creation">
-            </a>
-        </div>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
     </div>
+
+    <div class="carte-large">
+        <h2> {{ islandName }}</h2>
+
+        <div class="stats-ile">
+            <span class="stat-badge"> {{ avgNote }} / 5</span>
+            <span class="stat-badge"> {{ nbMiis }} Miis</span>
+        </div>
+
+        <hr class="separateur">
+
+        <div class="miis-container">
+            {% for mii in IslandMiis %}
+            <div class="mii-card">
+                <a href="/display_mii/{{ mii.id_mii }}">
+                    <img src="/static/miis/{{ mii.image }}" alt="{{ mii.nom_mii }}">
+                    <p>{{ mii.nom_mii }}</p>
+                </a>
+            </div>
+            {% endfor %}
+
+            <div class="mii-card">
+                <a href="/create_mii/{{ id_ile }}">
+                    <img src="{{ url_for('static', filename='miis/create_mii.png') }}" alt="Add a mii">
+                    <p>New Mii</p>
+                </a>
+            </div>
+        </div>
+
+        <p class="lien-secondaire"><a href="/profile">← Back to profile</a></p>
     </div>
 </body>
 </html>

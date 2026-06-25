@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Island creation</title>
     <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
 
 <body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
+
     <div class="carte">
-    <h1>Créer une nouvelle ile</h1>
-    {% if erreur %}
-        <p style="color:red">{{ erreur }}</p>
-    {% endif %}
-    <form action='/create_island' method='POST'>
-        <label>Nom de votre île : <input type="text" name="nom" required></label>
-        <button class="boutton" type='submit'>Ajouter</button>
-    </form>
-        <a class="lien-secondaire a" href="/profile">Retour au profil</a>
+        <h2>Create a new Island</h2>
+
+        {% if erreur %}
+            <p class="erreur">{{ erreur }}</p>
+        {% endif %}
+
+        <form action="/create_island" method="POST">
+            <div class="champ">
+                <label>Name of your island</label>
+                <input type="text" name="nom" required>
+            </div>
+            <div style="margin-top:18px;">
+                <button type="submit" class="boutton">Add</button>
+            </div>
+        </form>
+
+        <p class="lien-secondaire"><a href="/profile">Return to profil</a></p>
     </div>
 </body>
 

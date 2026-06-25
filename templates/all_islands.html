@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
-    <title>Toutes les iles TomoDachImac</title>
+    <title>All island</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <img src="{{url_for('static', filename='style/assets/logo_tomodachimac.png')}}" alt="TomoDachImac">
     </div>
     <div class="carte">
-        <h2>Toutes les îles</h2>
+        <h2>All island</h2>
 
         {% if iles %}
             {% for ile in iles %}
@@ -22,15 +22,15 @@
                 <div class="ile-actions">
                     <a class="badge-ile" href="/island/{{ ile['id_ile'] }}">{{ile['nom_ile']}}</a>
                     <span class="note-badge"> {{ ile['moyenne'] }} / 5</span>
-                    <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Noter</a>
+                    <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Rate</a>
                 </div>
             </div>
             {% endfor %}
         {% else %}
-            <p style="text-align:center; color:var(--bleu_fonce);">Aucune île disponible</p>
+            <p style="text-align:center; color:var(--bleu_fonce);">No island available</p>
         {% endif %}
 
-        <p class="lien-secondaire"><a href="/profile">Retour au profil</a></p>
+        <p class="lien-secondaire"><a href="/profile">return to profil</a></p>
     </div>
 </body>
 

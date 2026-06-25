@@ -3,74 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Mii</title>
-    <script src="../static/js/create_mii.js"></script> <!-- for crush imput if crush exists -->
+    <title>Create a Mii – TomoDachImac</title>
+    <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
+    <script src="../static/js/create_mii.js" defer></script>
 </head>
 <body>
-    <!-- test 2-->
-    <h1>create new mii</h1>
-    {% if erreur %}
-        <p style="color:red">{{erreur}}</p>
-    {% endif %}
-    <form action="/create_mii/{{id_ile}}" method="POST" enctype="multipart/form-data">
-        Name: <input type="text" name="name">
-        Age: <input type="number" name="age">
-        Sex:
-        <select name="sex">
-            <option value="woman">woman</option>
-            <option value="man">man</option>
-        </select>
-        Personnality:
-        <select name="personnality">
-            <option value="considerate">considerate</option>
-            <option value="outgoing">outgoing</option>
-            <option value="reserved">reserved</option>
-            <option value="ambitious">ambitious</option>
-        </select>
-        Import mii image: <input type="file" name="image" accept="image/*">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
 
-        Does your mii have a crush on an existing mii on {{idIsland}} island ?
-        <select name="crush_choice" class="user_choice">
-                {% for mii in allIslandMiis%}
-                    <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
-                {% endfor %}
-                <option value="none">none</option>
-        </select>
+    <div class="carte-large">
+        <h2>Create a new Mii</h2>
 
-        Does your mii have an existing mii for partner on {{idIsland}} island ?
-        <select name="partner_choice" class="user_choice">
-            {% for mii in allIslandMiis%}
-                <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
-            {% endfor %}
-            <option value="none">none</option>
-        </select>
+        {% if erreur %}
+            <p class="erreur">{{ erreur }}</p>
+        {% endif %}
 
-        Is your mii a part of an existing family on {{idIsland}} island ?
-        <select name="family_choice" class="user_choice">
-            {% for family in allIslandFamilies %}
-                <option value="{{family.id_famille}}">{{family.nom_famille}}</option>
-            {% endfor %}
-            <option value="none">no</option>
-        </select>
-        
-        Who's their father on {{idIsland}} island ?
-        <select name="family_choice" class="user_choice">
-            {% for mii in allIslandMiis%}
-                <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
-            {% endfor %}
-            <option value="none">none</option>
-        </select>
+        <form action="/create_mii/{{ id_ile }}" method="POST" enctype="multipart/form-data" class="form-mii">
 
-        Who's their mother on {{idIsland}} island ?
-        <select name="family_choice" class="user_choice">
-            {% for mii in allIslandMiis%}
-                <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
-            {% endfor %}
-            <option value="none">none</option>
-        </select>        
+            <div class="champ">
+                <label>Name</label>
+                <input type="text" name="name" required>
+            </div>
 
-        <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
-        <button type='submit'>Create mii</button>
-    </form>
+            <div class="champ">
+                <label>Age</label>
+                <input type="number" name="age" min="0" max="120" required>
+            </div>
+
+            <div class="champ">
+                <label>Sex</label>
+                <select name="sex">
+                    <option value="woman">Woman</option>
+                    <option value="man">Man</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label>Personality</label>
+                <select name="personnality">
+                    <option value="considerate">Considerate</option>
+                    <option value="outgoing">Outgoing</option>
+                    <option value="reserved">Reserved</option>
+                    <option value="ambitious">Ambitious</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label>Mii image</label>
+                <input type="file" name="image" accept="image/*">
+            </div>
+
+            <hr class="separateur">
+
+            <div class="champ">
+                <label>Does your mii have a crush on {{ idIsland }} island?</label>
+                <select name="crush_choice">
+                    <option value="none" selected>— none —</option>
+                    {% for mii in allIslandMiis %}
+                        <option value="{{ mii.id_mii }}">{{ mii.nom_mii }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="champ">
+                <label>Does your mii have a partner on {{ idIsland }} island?</label>
+                <select name="partner_choice">
+                    <option value="none" selected>— none —</option>
+                    {% for mii in allIslandMiis %}
+                        <option value="{{ mii.id_mii }}">{{ mii.nom_mii }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <hr class="separateur">
+
+            <div class="champ">
+                <label>Is your mii part of a family on {{ idIsland }} island?</label>
+                <select name="family_choice" id="id_famille" onchange="toggleFamilyLinks()">
+                    <option value="none" selected>— none —</option>
+                    {% for family in allIslandFamilies %}
+                        <option value="{{ family.id_famille }}">{{ family.nom_famille }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="champ">
+                <label>Who is their father on {{ idIsland }} island?</label>
+                <select name="id_pere">
+                    <option value="none" selected>— none —</option>
+                    {% for mii in allIslandMiis %}
+                        <option value="{{ mii.id_mii }}">{{ mii.nom_mii }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="champ">
+                <label>Who is their mother on {{ idIsland }} island?</label>
+                <select name="id_mere">
+                    <option value="none" selected>— none —</option>
+                    {% for mii in allIslandMiis %}
+                        <option value="{{ mii.id_mii }}">{{ mii.nom_mii }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="hidden" name="id_ile" value="{{ idIsland }}">
+
+            <div style="margin-top:8px;">
+                <button type="submit" class="boutton">Create Mii</button>
+            </div>
+        </form>
+
+        <p class="lien-secondaire"><a href="/island/{{ id_ile }}">← Back to island</a></p>
+    </div>
 </body>
 </html>
