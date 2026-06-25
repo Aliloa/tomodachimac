@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 25 juin 2026 à 09:30
+-- Généré le : jeu. 25 juin 2026 à 09:38
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `mii` (
   `image` text,
   `id_ile` int NOT NULL COMMENT 'cle etrangere',
   `sexe` text NOT NULL,
-  `personalite` text NOT NULL,
-  `if_famille` int DEFAULT NULL COMMENT '#',
+  `personnalite` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `id_famille` int DEFAULT NULL COMMENT '#',
   `id_pere` int DEFAULT NULL COMMENT '#',
   `id_mere` int DEFAULT NULL COMMENT '#',
   `id_partenaire` int DEFAULT NULL COMMENT '#',
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `mii` (
 -- Déchargement des données de la table `mii`
 --
 
-INSERT INTO `mii` (`id_mii`, `nom_mii`, `age`, `image`, `id_ile`, `sexe`, `personalite`, `if_famille`, `id_pere`, `id_mere`, `id_partenaire`, `id_crush`) VALUES
+INSERT INTO `mii` (`id_mii`, `nom_mii`, `age`, `image`, `id_ile`, `sexe`, `personnalite`, `id_famille`, `id_pere`, `id_mere`, `id_partenaire`, `id_crush`) VALUES
 (1, 'lou', 19, NULL, 2, 'feminin', 'Extraverti', NULL, NULL, NULL, NULL, NULL),
 (2, 'Denise', 21, NULL, 2, 'F', 'Timide', NULL, NULL, NULL, NULL, NULL);
 
