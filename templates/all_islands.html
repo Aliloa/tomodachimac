@@ -10,11 +10,14 @@
 <body>
     <h1>Toutes les iles</h1>
     {% if iles %}
-        {% for ile in iles %}
-            <a href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
-        {% endfor %}
+    {% for ile in iles %}
+    <div>
+        <a href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
+        note: {{ ile['moyenne'] }}
+    </div>
+    {% endfor %}
     {% else %}
-        <p>Aucune île disponible</p>
+    <p>Aucune île disponible</p>
     {% endif %}
 </body>
 
