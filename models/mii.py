@@ -57,7 +57,7 @@ def getMiiCrushInformations(idMii):
     cursor.execute("SELECT Copy.* FROM mii Original JOIN mii Copy ON Original.id_crush = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
     return cursor.fetchone()
 
-def getCrushIdWithName(nom_mii):
+def getCrushIdWithName(idMii):
     cursor = mydb.cursor(dictionary=True)
 
     cursor.execute("SELECT id_mii FROM mii Original JOIN mii Copy ON Original.id_crush = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
