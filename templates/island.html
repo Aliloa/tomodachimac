@@ -33,14 +33,13 @@
             </div>
             {% endfor %}
 
-            {% if session['user']['id_compte'] == ile['id_compte'] %}
-            <div class="mii-card">
-                <a href="/create_mii/{{ ile['id_ile'] }}">
-                    New mii
-                    <img src="../miis/create_mii.png" alt="mii creation">
-                </a>
-            </div>
-            {% endif %}
+        {% if session['user']['id_compte'] == ile['id_compte'] %}
+        <div class="mii-card add-mii-card">
+            <a href="/create_mii/{{ ile['id_ile'] }}" class="boutton-add-mii">
+                ADD a Mii +
+            </a>
+        </div>
+        {% endif %}
         </div>
         <p class="lien-secondaire"><a href="/profile">Back to profile</a></p>
     </div>
