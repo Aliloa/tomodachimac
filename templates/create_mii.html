@@ -3,31 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Mii</title>
-    <script src="../static/js/create_mii.js"></script> <!-- for crush imput if crush exists -->
+    <title>Create a Mii – TomoDachImac</title>
+    <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
+    <script src="../static/js/create_mii.js" defer></script>
 </head>
 <body>
-    <!-- test 2-->
-    <h1>create new mii</h1>
-    {% if erreur %}
-        <p style="color:red">{{erreur}}</p>
-    {% endif %}
-    <form action="/create_mii/{{id_ile}}" method="POST" enctype="multipart/form-data">
-        Name: <input type="text" name="name">
-        Age: <input type="number" name="age">
-        Sex:
-        <select name="sex">
-            <option value="woman">woman</option>
-            <option value="man">man</option>
-        </select>
-        Personnality:
-        <select name="personnality">
-            <option value="considerate">considerate</option>
-            <option value="outgoing">outgoing</option>
-            <option value="reserved">reserved</option>
-            <option value="ambitious">ambitious</option>
-        </select>
-        Import mii image: <input type="file" name="image" accept="image/*">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
 
         Does your mii have a crush on an existing mii on {{islandName}} island ?
         <select name="crush_choice" class="user_choice">

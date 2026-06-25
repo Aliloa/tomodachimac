@@ -1,10 +1,14 @@
 from .db import mydb
 
-def getAllUserIslandMiis(idUser, idIsland):
-    cursor = mydb.cursor(dictionary=True)
+def getAllIslandMiis(id_ile):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM mii WHERE id_ile = %s", (id_ile,))
+    return mycursor.fetchall()
 
-    cursor.execute("SELECT * FROM mii JOIN ile ON mii.id_ile = ile.id_ile JOIN compte ON compte.id_compte = ile.id_compte WHERE (mii.id_ile = %s AND ile.id_compte = %s )", (idIsland, idUser))
-    return cursor.fetchall() # returns array of dictionaries containing all rows of the result
+def getMiiById(id_mii):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM mii WHERE id_mii = %s", (id_mii,))
+    return mycursor.fetchone()
 
 def CountAllIslandMiis(idIsland): # number of miis on an island
     cursor = mydb.cursor(dictionary=True)
@@ -13,6 +17,18 @@ def CountAllIslandMiis(idIsland): # number of miis on an island
     result = cursor.fetchone() # dictionnary {"nbMiis" : number of miis on the island}
     return result["nbMiis"]
 
+def deleteMiisByIslandId(id_ile):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("DELETE FROM mii WHERE id_ile = %s", (id_ile,))
+    mydb.commit()
+    mycursor.close()
+
+def deleteMiiById(id_mii):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("DELETE FROM mii WHERE id_mii = %s", (id_mii,))
+    mydb.commit()
+    mycursor.close()
+    
 # for a single mii :
 def getAllMiiInformations(idMii):
     cursor = mydb.cursor(dictionary=True)

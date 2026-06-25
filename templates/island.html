@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island</title>
+    <title>{{ islandName }} – TomoDachImac</title>
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
+
 <body>
-    <div class="carte">
-    <h1>{{islandName}}</h1>
-    <p>Average note: {{avgNote}}</p>
-    <p>Number of Miis: {{nbMiis}}</p>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
 
-    <div class="miis-container">
-        {% for mii in IslandMiis %}
+    <div class="carte-large">
+        <h1>{{ ile['nom_ile'] }}</h1>
+        <div class="stats-ile">
+            <span class="stat-badge"> {{ avgNote }} / 5</span>
+            <span class="stat-badge"> {{ nbMiis }} Miis</span>
+        </div>
+
+        <hr class="separateur">
+
+        <div class="miis-container">
+            {% for mii in IslandMiis %}
             <div class="mii-card">
-                <a href="/display_mii/{{mii.id_mii}}">
-                    <img src="/static/miis/{{mii.image}}" alt="{{mii.nom_mii}}">
+                <a href="/display_mii/{{ mii['id_mii'] }}">
+                    <img src="/static/miis/{{ mii['image'] }}" alt="{{ mii['nom_mii'] }}">
                 </a>
-                <p>{{mii.nom_mii}}</p>
+                <p>{{ mii['nom_mii'] }}</p>
             </div>
-        {% endfor %}
+            {% endfor %}
 
-        <div class="mii-card">
-            <a href="/create_mii/{{id_ile}}">
-                Create new mii
-                <img src="../miis/create_mii.png" alt="mii creation">
+        {% if session['user']['id_compte'] == ile['id_compte'] %}
+        <div class="mii-card add-mii-card">
+            <a href="/create_mii/{{ ile['id_ile'] }}" class="boutton-add-mii">
+                ADD a Mii +
             </a>
         </div>
-    </div>
+        {% endif %}
+        </div>
+        {% if session['user']['id_compte'] == ile['id_compte'] %}
+        <form action="/delete_island/{{ ile['id_ile'] }}" method="POST">
+            <button type="submit">Supprimer l'île</button>
+        </form>
+        {% endif %}
+        <p class="lien-secondaire"><a href="/profile">Back to profile</a></p>
     </div>
 </body>
+
 </html>
