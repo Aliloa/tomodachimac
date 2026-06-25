@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
+    <title>Toutes les iles TomoDachImac</title>
 </head>
 
 <body>
-    <h1>Toutes les iles</h1>
-    {% if iles %}
-    {% for ile in iles %}
-    <div>
-        <a class="badge-ile" href="/island/{{ile['id_ile']}}">{{ile['nom_ile']}}</a>
-        note: {{ ile['moyenne'] }}
-        <a href="/rate_island/{{ ile['id_ile'] }}">noter</a>
+    <div class="logo">
+        <img src="{{url_for('static', filename='style/assets/logo_tomodachimac.png')}}" alt="TomoDachImac">
     </div>
-    {% endfor %}
-    {% else %}
-    <p>Aucune île disponible</p>
-    {% endif %}
+    <div class="carte">
+        <h2>Toutes les îles</h2>
+
+        {% if iles %}
+            {% for ile in iles %}
+            <div class="ile-bloc">
+                <div class="ile-actions">
+                    <a class="badge-ile" href="/island/{{ ile['id_ile'] }}">{{ile['nom_ile']}}</a>
+                    <span class="note-badge"> {{ ile['moyenne'] }} / 5</span>
+                    <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Noter</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align:center; color:var(--bleu_fonce);">Aucune île disponible</p>
+        {% endif %}
+
+        <p class="lien-secondaire"><a href="/profile">Retour au profil</a></p>
+    </div>
 </body>
 
 </html>

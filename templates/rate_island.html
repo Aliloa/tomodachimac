@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style/style.css">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
+    <title>Note Ile TomoDachImac</title>
 </head>
 <body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
     <div class="carte">
-    <h1>Saisir une note /5</h1>
-    <form action="/rate_island/{{ id_ile }}" method="POST">
-        Note: <input type="text" name="note">
-        <button type='submit'>Valider</button>
-    </form>
-    <a href="/all_islands">Retour</a>
+    <h2>Saisir une note /5</h2>
+        {% if erreur %}
+            <p class="erreur">{{ erreur }}</p>
+        {% endif %}
+
+        <form action="/rate_island/{{ id_ile }}" method="POST">
+            <div class="champ">
+                <label>Note (0 à 5)</label>
+                <input type="number" name="note" min="0" max="5" step="1" required>
+            </div>
+            <div style="margin-top:18px;">
+                <button type="submit" class="boutton">Valider</button>
+            </div>
+        </form>
+
+        <p class="lien-secondaire"><a href="/all_islands">← Retour</a></p>
+    </div>
 </body>
+</html>
 </html>
