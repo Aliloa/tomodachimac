@@ -183,6 +183,7 @@ def display_mii(id_mii):
 
 @server.route('/display_mii/<int:id_family>/<int:id_mii>', methods=['GET'])
 def display_familly(id_mii, id_family):
+    miiInfo = mii.getMiiById(id_mii)
     nbMembers = family.countFamilyMembers(id_family)
 
     # parents
@@ -203,7 +204,7 @@ def display_familly(id_mii, id_family):
         if member['id_mii'] not in excludeIds:
             otherMembers.append(member)
 
-    return render_template('family.html', nbMembers=nbMembers, otherMembers=otherMembers, fatherInfo=fatherInfo, motherInfo=motherInfo, siblingsInfo=siblingsInfo)
+    return render_template('family.html',  miiInfo=miiInfo, nbMembers=nbMembers, otherMembers=otherMembers, fatherInfo=fatherInfo, motherInfo=motherInfo, siblingsInfo=siblingsInfo)
 
 @server.route('/delete_mii/<int:id_mii>', methods=['POST'])
 def delete_mii(id_mii):

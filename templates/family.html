@@ -6,17 +6,17 @@
     <title>Family</title>
 </head>
 <body>
-    <h1>Other members of {{mii}}'s family</h1>
+    <h1>Other members of {{miiInfo.nom_mii}}'s family</h1>
     <div class="family-miis-container">
         <p>Father</p>
         <div class="mii-card">
-           <img src="{{FatherInfo.image}}" alt="{{FatherInfo.nom_mii}}">
-            <p>{{FatherInfo.nom_mii}}</p>
+           <img src="{{fatherInfo.image}}" alt="{{fatherInfo.nom_mii}}">
+            <p>{{fatherInfo.nom_mii}}</p>
         </div>
         <p>Mother</p>
         <div class="mii-card">
-           <img src="{{MotherInfo.image}}" alt="{{FatherInfo.nom_mii}}">
-            <p>{{FatherInfo.nom_mii}}</p>
+           <img src="{{motherInfo.image}}" alt="{{motherInfo.nom_mii}}">
+            <p>{{motherInfo.nom_mii}}</p>
         </div>
         <p>Siblings</p>
         {% for siblingInfo in siblingsInfo %}
