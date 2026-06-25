@@ -127,57 +127,40 @@ def display_mii_creator(id_ile):
 
 @server.route('/create_mii/<int:id_ile>', methods=['POST'])
 def create_mii(id_ile):
-    # all mii creation informations (user input)
-    name = request.form['name']
-    age = request.form['age']
-    sex = request.form['sex']
-    personnality = request.form['personnality']
-    image = request.files['image']
+    name = request.form.get('name', '').strip()
+    age = request.form.get('age', '').strip() or None
+    sex = request.form.get('sex', '').strip() or None
+    personnality = request.form.get('personnality', '').strip() or None
 
-    # crush :
-    crush_choice = request.form['crush_choice']
-    if crush_choice != 'none':
-        idCrush = int(crush_choice)
-    else:
-        idCrush = None
-    # partner :
-    partner_choice = request.form['partner_choice']
-    if partner_choice != 'none':
-        idPartner = int(partner_choice)
-    else:
-        idPartner = None
-    # father :
-    father_choice = request.form['father_choice']
-    if father_choice != 'none':
-        idFather = int(father_choice)
-    else:
-        idFather = None
-    # mother :
-    mother_choice = request.form['mother_choice']
-    if mother_choice != 'none':
-        idMother = int(mother_choice)
-    else:
-        idMother = None
-    # family name :
-    family_choice = request.form['family_choice']
-    familyName = request.form['family_name']
-    if family_choice != 'none':
-        idFamily = int(family_choice)
-    elif familyName:
-        idFamily = family.createFamily(familyName)  # returns new id_famille via cursor.lastrowid
-    else:
-        idFamily = None
-
-    # information for db :
-    idUser = session['user']['id_compte']
-
+    image = request.files.get('image')
     imageFilename = None
     if image and image.filename != '':
         imageFilename = image.filename
-        image.save(f"static/miis/{image.filename}") # saving the image the user imported
+        image.save(f"static/miis/{image.filename}")
 
-    if familyName:
-        family.createFamily(familyName)
+    crush_choice = request.form.get('crush_choice', 'none')
+    idCrush = int(crush_choice) if crush_choice != 'none' else None
+
+    partner_choice = request.form.get('partner_choice', 'none')
+    idPartner = int(partner_choice) if partner_choice != 'none' else None
+
+    father_choice = request.form.get('father_choice', 'none')
+    idFather = int(father_choice) if father_choice != 'none' else None
+
+    mother_choice = request.form.get('mother_choice', 'none')
+    idMother = int(mother_choice) if mother_choice != 'none' else None
+
+    family_choice = request.form.get('family_choice', 'none')
+    familyName = request.form.get('family_name', '').strip()
+
+    if family_choice != 'none':
+        idFamily = int(family_choice)
+    elif familyName:
+        idFamily = family.createFamily(familyName)
+    else:
+        idFamily = None
+
+    idUser = session['user']['id_compte']
 
     mii.createMii(name, sex, age, personnality, imageFilename, idUser, id_ile, idCrush, idPartner, idFamily, idFather, idMother)
 

@@ -71,6 +71,10 @@ def getMiiPartnerInformations(idMii):
 
 def createMii(name, sex, age, personnality, image, idUser, idIsland, idCrush, idPartner, idFamily, idFather, idMother):
     cursor = mydb.cursor(dictionary=True)
-
-    cursor.execute("INSERT INTO mii (nom_mii, sexe, age, personnalite, image, id_ile, id_crush, id_partenaire, id_famille, id_pere, id_mere) VALUES (%s, %s, %s, %s, %s, %s)", (name, sex, age, personnality, image, idIsland,  idCrush, idPartner, idFamily, idFather, idMother))
+    cursor.execute(
+        """INSERT INTO mii
+           (nom_mii, sexe, age, personnalite, image, id_ile, id_crush, id_partenaire, id_famille, id_pere, id_mere)
+           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+        (name, sex, age, personnality, image, idIsland, idCrush, idPartner, idFamily, idFather, idMother)
+    )
     mydb.commit()

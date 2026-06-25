@@ -19,8 +19,8 @@
     {% endif %}
 
     <form action="/create_mii/{{id_ile}}" method="POST" enctype="multipart/form-data">
-        Name: <input type="text" name="name">
-        Age: <input type="number" name="age">
+        Name: <input type="text" name="name" required>
+        Age: <input type="number" name="age" required>
         Sex:
         <select name="sex">
             <option value="woman">woman</option>
