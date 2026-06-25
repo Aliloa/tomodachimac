@@ -83,7 +83,7 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
 }
 .champ input:focus { background-color: var(--bleu_fonce); color: var(--blanc_site); }
 
-.boutton {
+.boutton {  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,3 +105,23 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
 .erreur { color: var(--rouge_site); font-size: 0.85rem; text-align: center; }
 
 .separateur { border: none; border-top: 1.5px solid var(--bleu); margin: 4px 0; }
+
+.badge-ile {
+    background-color: var(--jaune_clair);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    color: var(--noir_site);
+    text-align: center;
+    border: 2px solid var(--jaune);
+}
+.lien-secondaire {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--bleu_fonce);
+}
+ 
+.lien-secondaire a {
+    color: var(--bleu_fonce);
+    text-decoration: underline;
+}

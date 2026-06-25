@@ -6,17 +6,19 @@
     <title>Island</title>
 </head>
 <body>
+    <div class="carte">
     <h1>{{islandName}}</h1>
     <p>Average note: {{avgNote}}</p>
     <p>Number of Miis: {{nbMiis}}</p>
     
-    <div class="miis-container">
-        {% for mii in IslandMiis %}
-            <div class="mii-card">
-                <img src="{{mii.image}}" alt="{{mii.nom_mii}}">
-                <p>{{mii.name}}</p>
-            </div>
-        {% endfor %}
+        <div class="miis-container">
+            {% for mii in IslandMiis %}
+                <div class="mii-card">
+                    <img src="{{mii.image}}" alt="{{mii.nom_mii}}">
+                    <p>{{mii.name}}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

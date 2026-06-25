@@ -5,6 +5,7 @@ import models.mii as mii
 import models.users as users
 import models.island as island
 import models.note as note
+import models.note as family
 import os
 from dotenv import load_dotenv
 
@@ -93,16 +94,16 @@ def showIsland(id_ile):
     
     nbMiis = mii.CountAllIslandMiis(id_ile) # this function returns a number directly, no dictionnary
     # avgNote = note.getAverageIslandNote(id_ile)
-    IslandMiis = mii.getAllUserIslandMiis(id_ile) # gets images and names of miis
+    IslandMiis = mii.getAllUserIslandMiis(idUser, id_ile) # gets images and names of miis
 
-    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis =IslandMiis)
+    return render_template('island.html', islandName=islandName, avgNote="1", nbMiis=nbMiis, IslandMiis=IslandMiis)
 
-@server.route('/create_mii', methods=['GET'])
-def display_mii_creator():
+@server.route('/create_mii/<int:id_ile>', methods=['GET'])
+def display_mii_creator(id_ile):
     return render_template('create_mii.html')
 
-@server.route('/create_mii', methods=['POST'])
-def create_mii():
+@server.route('/create_mii/<int:id_ile>', methods=['POST'])
+def create_mii(id_ile):
     # all mii creation informations (user input)
     name = request.form['name']
     age = request.form['age']
@@ -112,14 +113,55 @@ def create_mii():
 
     # information for db :
     idUser = session['user']['id_compte']
-    idIsland = request.form['id_ile']
 
     if image and image.filename != '':
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
 
-    mii.createMii(name, sex, age, personnality, image, idUser, idIsland)
+    allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
 
-    return render_template('create_mii.html')
+    mii.createMii(name, sex, age, personnality, image, idUser, id_ile)
+
+    return render_template('create_mii.html', IdIsland=id_ile, allIslandMiis=allIslandMiis)
+
+@server.route('/display_mii/<int:id_mii>', methods=['GET'])
+def display_mii(id_mii):
+    miiInfo = mii.getAllMiiInformations(id_mii)
+    name =  mii.getAllMiiInformations(id_mii)['nom_mii']
+    sex =  mii.getAllMiiInformations(id_mii)['sex']
+    age =  mii.getAllMiiInformations(id_mii)['age']
+    personnality =  mii.getAllMiiInformations(id_mii)['personnalite']
+    image =  mii.getAllMiiInformations(id_mii)['image']
+
+    crushInfo = mii.getMiiCrushInformations(id_mii)
+    familyName = family.getFamilyName(miiInfo['id_famille'])
+    partnerInfo = mii.getMiiPartnerInformations(id_mii)
+
+    return render_template('display_mii.html', miiInfo=miiInfo, crushInfo=crushInfo, partnerInfo=partnerInfo, familyName=familyName)
+
+@server.route('/display_mii/<int:id_family>/<int:id_mii>', methods=['GET'])
+def display_familly(id_mii, id_family):
+    nbMembers = family.countFamilyMembers(id_family)
+
+    # parents
+    parents = mii.getMiiParents(id_mii)
+    idFather = parents['id_pere']
+    fatherInfo = mii.getAllMiiInformations(idFather)
+    idMother = parents['id_mere']
+    motherInfo = mii.getAllMiiInformations(idMother)
+    # siblings
+    siblingsInfo = mii.getMiiSiblings(id_mii)
+    siblingsIds = [siblingInfo['id_mii'] for siblingInfo in siblingsInfo]
+    # others
+    allMembers = family.getAllFamilyMembers(id_family)
+    otherMembers = []
+    excludeIds = [id_mii, idFather, idMother] + siblingsIds
+
+    for member in allMembers:
+        if member['id_mii'] not in excludeIds:
+            otherMembers.append(member)
+
+    return render_template('family.html', nbMembers=nbMembers, otherMembers=otherMembers, fatherInfo=fatherInfo, motherInfo=motherInfo, siblingsInfo=siblingsInfo)
+
 
 #pour voir le lien du serveur
 if __name__=="__main__":

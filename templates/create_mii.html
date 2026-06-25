@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Mii</title>
+    <script src="../static/js/create_mii.js"></script> <!-- for crush imput if crush exists -->
 </head>
 <body>
+    <!-- test 2-->
     <h1>create new mii</h1>
     {% if erreur %}
         <p style="color:red">{{erreur}}</p>
@@ -25,8 +27,67 @@
             <option value="reserved">reserved</option>
             <option value="ambitious">ambitious</option>
         </select>
-        Import image: <input type="file" name="image" accept="image/*">
+        Import mii image: <input type="file" name="image" accept="image/*">
+
+        Does your mii have a crush on an existing mii on {{idIsland}} island ?
+        <select name="crush_choice" class="user_choice" onchange="toggleInput()">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+        </select>
+
+        <div class="user-input" style="display:none;">
+            <select name="crush_id" class="user_id">
+                <option value="">Which one ?
+                    {% for mii in allIslandMiis%}
+                        <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
+                    {% endfor %}
+                </option>
+            </select>
+        </div>
+
+        Does your mii have an existing mii for partner on {{idIsland}} island ?
+        <select name="partner_choice" class="user_choice" onchange="toggleInput()">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+        </select>
+
+        <div class="user-input" style="display:none;">
+            <select name="partner_id" class="user_id">
+                <option value="">Which one ?
+                    {% for mii in allIslandMiis%}
+                        <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
+                    {% endfor %}
+                </option>
+            </select>
+        </div>
+
+        Is your mii a part of an existing family on {{idIsland}} island ?
+        <select name="family_choice" class="user_choice" onchange="toggleInput()">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+        </select>
         
+        <div class="user-input" style="display:none;">
+            <select name="id_famille" class="user_choice" onchange="toggleInput()">
+                <option value=""> Which family ?</option>
+                {% for family in allIslandFamilies %}
+                    <option value="{{family.id_famille}}">{{family.nom_famille}}</option>
+                {% endfor %}
+            </select>
+
+            <div class="user_choice" style="display:none;">
+                {% for member in allIslandMiis %}
+                    <div>
+                        <select name="link_{{member.id_mii}}">
+                            <option value="pere">father of</option>
+                            <option value="mere">mother of</option>
+                            <option value="enfant">child of</option>
+                            <option value="autre">other</option>
+                        </select>
+                    </div>
+                {% endfor %}
+            </div>
+
         <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
         <button type='submit'>Create mii</button>
     </form>

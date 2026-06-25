@@ -1,6 +1,5 @@
 "use strict";
 
-
 async function calltrying() {
  const userschoice = document.getElementById('userschoice');
  const response = await fetch("/trying",

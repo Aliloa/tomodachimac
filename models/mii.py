@@ -1,9 +1,9 @@
 from .db import mydb
 
-def getAllUserIslandMiis(idIsland):
+def getAllUserIslandMiis(idUser, idIsland):
     cursor = mydb.cursor(dictionary=True)
 
-    cursor.execute("SELECT nom_mii, image FROM mii WHERE id_ile = %s", (idIsland, ))
+    cursor.execute("SELECT nom_mii, image FROM mii JOIN ile ON mii.id_ile = ile.id_ile JOIN compte ON compte.id_compte = ile.id_compte WHERE (mii.id_ile = %s AND ile.id_compte = %s )", (idIsland, idUser))
     return cursor.fetchall() # returns array of dictionaries containing all rows of the result
 
 def CountAllIslandMiis(idIsland): # number of miis on an island
@@ -37,6 +37,12 @@ def getMiiCrushInformations(idMii):
     cursor = mydb.cursor(dictionary=True)
 
     cursor.execute("SELECT Copy.* FROM mii Original JOIN mii Copy ON Original.id_crush = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
+    return cursor.fetchone()
+
+def getMiiPartnerInformations(idMii):
+    cursor = mydb.cursor(dictionary=True)
+
+    cursor.execute("SELECT Copy.* FROM mii Original JOIN mii Copy ON Original.id_partenaire = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
     return cursor.fetchone()
 
 def createMii(name, sex, age, personnality, image, idUser, idIsland):

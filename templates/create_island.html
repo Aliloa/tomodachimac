@@ -7,17 +7,17 @@
 </head>
 
 <body>
+    <div class="carte">
     <h1>Créer une nouvelle ile</h1>
     {% if erreur %}
-    <p style="color:red">{{ erreur }}</p>
+        <p style="color:red">{{ erreur }}</p>
     {% endif %}
     <form action='/create_island' method='POST'>
         <label>Nom de votre île : <input type="text" name="nom" required></label>
-        <button type='submit'>Ajouter</button>
+        <button class="boutton" type='submit'>Ajouter</button>
     </form>
-</body>
-
-<a href="/profile">Retour au profil</a>
+        <a class="lien-secondaire a" href="/profile">Retour au profil</a>
+    </div>
 </body>
 
 </html>
