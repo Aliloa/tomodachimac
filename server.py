@@ -5,7 +5,7 @@ import models.mii as mii
 import models.users as users
 import models.island as island
 import models.note as note
-import models.note as family
+import models.family as family
 import os
 from dotenv import load_dotenv
 

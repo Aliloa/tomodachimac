@@ -11,8 +11,8 @@
 
     <div class="miis-informations">
         <p>Age: {{miiInfo.age}}</p>
-        <p>Sex: {{miiInfo.sex}}</p>
-        <p>Personnality: {{miiInfo.personnality}}</p>
+        <p>Sex: {{miiInfo.sexe}}</p>
+        <p>Personnality: {{miiInfo.personnalite}}</p>
         <p>Member of:</p>
         <a href="/family/{{miiInfo.id_famille}}">
             <p>{{familyName}} family</p>
@@ -24,6 +24,7 @@
             </a>
         {%else%}
             <p>{{miiInfo.nom_mii}} has no partner for the moment.</p>
+        {%endif%}
         {%if crushInfo%}
             <p>Crush: {{crushInfo.nom_mii}}</p>
             <a href="/display_mii/{{crushInfo.id_mii}}">
