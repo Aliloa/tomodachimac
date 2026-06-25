@@ -110,8 +110,9 @@ def showIsland(id_ile):
     nbMiis = mii.CountAllIslandMiis(id_ile) # this function returns a number directly, no dictionnary
     avgNote = note.getAverageIslandNote(id_ile)
     IslandMiis = mii.getAllIslandMiis(id_ile) # gets images and names of miis
+    owner = users.getUserByIslandId(id_ile)
 
-    return render_template('island.html',ile=ile, avgNote=avgNote, nbMiis=nbMiis, IslandMiis=IslandMiis, )
+    return render_template('island.html',ile=ile, avgNote=avgNote, nbMiis=nbMiis, IslandMiis=IslandMiis,owner=owner )
 
 @server.route('/create_mii/<int:id_ile>', methods=['GET'])
 def display_mii_creator(id_ile):
