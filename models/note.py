@@ -15,3 +15,9 @@ def getNotesByIslandId(id_ile):
     mycursor = mydb.cursor(dictionary=True)
     mycursor.execute("SELECT * FROM note WHERE id_ile= %s", (id_ile,))
     return mycursor.fetchall()
+
+def getAverageIslandNote(id_ile):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT AVG(note) as moyenne FROM note WHERE id_ile = %s", (id_ile,))
+    result = mycursor.fetchone()
+    return result['moyenne'] if result['moyenne'] else None

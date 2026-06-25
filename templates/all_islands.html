@@ -12,8 +12,9 @@
     {% if iles %}
     {% for ile in iles %}
     <div>
-        <a href="/rate_island/{{ ile['id_ile'] }}">{{ ile['nom_ile'] }}</a>
+        <a class="badge-ile" href="/island/{{ile['id_ile']}}">{{ile['nom_ile']}}</a>
         note: {{ ile['moyenne'] }}
+        <a href="/rate_island/{{ ile['id_ile'] }}">noter</a>
     </div>
     {% endfor %}
     {% else %}

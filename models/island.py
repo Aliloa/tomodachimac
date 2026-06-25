@@ -26,3 +26,9 @@ def deleteIslandById(id_island):
     mycursor.execute("DELETE FROM ile WHERE id_ile = %s", (id_island,))
     mydb.commit()
     mycursor.close()
+
+def renameIsland(id_ile, new_name):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("UPDATE ile SET nom_ile = %s WHERE id_ile = %s", (new_name, id_ile))
+    mydb.commit()
+    mycursor.close()

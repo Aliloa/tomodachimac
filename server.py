@@ -75,15 +75,17 @@ def delete_island(id_ile):
     island.deleteIslandById(id_ile)
     return redirect('/profile')
 
+@server.route('/rename_island/<int:id_ile>', methods=['POST'])
+def rename_island(id_ile):
+    new_name = request.form['nom']
+    island.renameIsland(id_ile, new_name)
+    return redirect('/profile')
+
 @server.route('/all_islands', methods=['GET'])
 def display_all_islands():
     iles = island.getAllIslands()
     for ile in iles:
-        notes = note.getNotesByIslandId(ile['id_ile'])
-        if notes:
-            ile['moyenne'] = sum(n['note'] for n in notes) / len(notes)
-        else:
-            ile['moyenne'] = None
+        ile['moyenne'] = note.getAverageIslandNote(ile['id_ile'])
     return render_template('all_islands.html', iles=iles)
 
 @server.route('/island/<int:id_ile>', methods=['GET'])
