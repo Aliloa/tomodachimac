@@ -39,14 +39,20 @@ def getMiiCrushInformations(idMii):
     cursor.execute("SELECT Copy.* FROM mii Original JOIN mii Copy ON Original.id_crush = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
     return cursor.fetchone()
 
+def getCrushIdWithName(nom_mii):
+    cursor = mydb.cursor(dictionary=True)
+
+    cursor.execute("SELECT id_mii FROM mii Original JOIN mii Copy ON Original.id_crush = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
+    return cursor.fetchone()
+
 def getMiiPartnerInformations(idMii):
     cursor = mydb.cursor(dictionary=True)
 
     cursor.execute("SELECT Copy.* FROM mii Original JOIN mii Copy ON Original.id_partenaire = Copy.id_mii WHERE Original.id_mii = %s", (idMii, ))
     return cursor.fetchone()
 
-def createMii(name, sex, age, personnality, image, idUser, idIsland):
+def createMii(name, sex, age, personnality, image, idUser, idIsland, idCrush, idPartner, idFamily, idFather, idMother):
     cursor = mydb.cursor(dictionary=True)
 
-    cursor.execute("INSERT INTO mii (nom_mii, sexe, age, personnalite, image, id_ile) VALUES (%s, %s, %s, %s, %s, %s)", (name, sex, age, personnality, image, idIsland))
+    cursor.execute("INSERT INTO mii (nom_mii, sexe, age, personnalite, image, id_ile, id_crush, id_partenaire, id_famille, id_pere, id_mere) VALUES (%s, %s, %s, %s, %s, %s)", (name, sex, age, personnality, image, idIsland,  idCrush, idPartner, idFamily, idFather, idMother))
     mydb.commit()

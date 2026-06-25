@@ -107,8 +107,10 @@ def display_mii_creator(id_ile):
     idUser = session['user']['id_compte']
 
     allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
+    allIslandFamilies = family.getFamiliesByIsland(id_ile)
+    islandName = island.getIslandById(id_ile)['nom_ile']
 
-    return render_template('create_mii.html', id_ile=id_ile, allIslandMiis=allIslandMiis)
+    return render_template('create_mii.html', islandName=islandName, id_ile=id_ile, allIslandMiis=allIslandMiis, allIslandFamilies=allIslandFamilies)
 
 @server.route('/create_mii/<int:id_ile>', methods=['POST'])
 def create_mii(id_ile):
@@ -118,6 +120,37 @@ def create_mii(id_ile):
     sex = request.form['sex']
     personnality = request.form['personnality']
     image = request.files['image']
+    # crush :
+    crush_choice = request.form['crush_choice']
+    if crush_choice != 'none':
+        idCrush = int(crush_choice)
+    else:
+        idCrush = None
+    # partner :
+    partner_choice = request.form['partner_choice']
+    if partner_choice != 'none':
+        idPartner = int(partner_choice)
+    else:
+        idPartner = None
+    # father :
+    father_choice = request.form['father_choice']
+    if father_choice != 'none':
+        idFather = int(father_choice)
+    else:
+        idFather = None
+    # mother :
+    mother_choice = request.form['mother_choice']
+    if mother_choice != 'none':
+        idMother = int(mother_choice)
+    else:
+        idMother = None
+    # family name :
+    family_choice = request.form['family_choice']
+    if family_choice != 'none':
+        idFamily = int(family_choice)
+    else:
+        idFamily = None
+
 
     # information for db :
     idUser = session['user']['id_compte']
@@ -127,7 +160,7 @@ def create_mii(id_ile):
         imageFilename = image.filename
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
 
-    mii.createMii(name, sex, age, personnality, imageFilename, idUser, id_ile)
+    mii.createMii(name, sex, age, personnality, imageFilename, idUser, id_ile, idCrush, idPartner, idFamily, idFather, idMother)
 
     return redirect('/profile')
 
@@ -135,7 +168,10 @@ def create_mii(id_ile):
 def display_mii(id_mii):
     miiInfo = mii.getAllMiiInformations(id_mii)
     crushInfo = mii.getMiiCrushInformations(id_mii)
-    familyName = family.getFamilyName(miiInfo['id_famille'])
+    if miiInfo['id_famille'] is not None:
+        familyName = family.getFamilyName(miiInfo['id_famille'])
+    else:
+        familyName = None
     partnerInfo = mii.getMiiPartnerInformations(id_mii)
 
     return render_template('display_mii.html', miiInfo=miiInfo, crushInfo=crushInfo, partnerInfo=partnerInfo, familyName=familyName)

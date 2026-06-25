@@ -29,7 +29,7 @@
         </select>
         Import mii image: <input type="file" name="image" accept="image/*">
 
-        Does your mii have a crush on an existing mii on {{idIsland}} island ?
+        Does your mii have a crush on an existing mii on {{islandName}} island ?
         <select name="crush_choice" class="user_choice">
                 {% for mii in allIslandMiis%}
                     <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
@@ -37,7 +37,7 @@
                 <option value="none">none</option>
         </select>
 
-        Does your mii have an existing mii for partner on {{idIsland}} island ?
+        Does your mii have an existing mii for partner on {{islandName}} island ?
         <select name="partner_choice" class="user_choice">
             {% for mii in allIslandMiis%}
                 <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
@@ -45,7 +45,7 @@
             <option value="none">none</option>
         </select>
 
-        Is your mii a part of an existing family on {{idIsland}} island ?
+        Is your mii a part of an existing family on {{islandName}} island ?
         <select name="family_choice" class="user_choice">
             {% for family in allIslandFamilies %}
                 <option value="{{family.id_famille}}">{{family.nom_famille}}</option>
@@ -53,23 +53,23 @@
             <option value="none">no</option>
         </select>
         
-        Who's their father on {{idIsland}} island ?
-        <select name="family_choice" class="user_choice">
+        Who's their father on {{islandName}} island ?
+        <select name="father_choice" class="user_choice">
             {% for mii in allIslandMiis%}
                 <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
             {% endfor %}
             <option value="none">none</option>
         </select>
 
-        Who's their mother on {{idIsland}} island ?
-        <select name="family_choice" class="user_choice">
+        Who's their mother on {{islandName}} island ?
+        <select name="mother_choice" class="user_choice">
             {% for mii in allIslandMiis%}
                 <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
             {% endfor %}
             <option value="none">none</option>
         </select>        
 
-        <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
+        <input type="hidden" name="id_ile" value="{{id_ile}}"> <!-- hidden input to get id_ile -->
         <button type='submit'>Create mii</button>
     </form>
 </body>

@@ -14,9 +14,13 @@
         <p>Sex: {{miiInfo.sexe}}</p>
         <p>Personnality: {{miiInfo.personnalite}}</p>
         <p>Member of:</p>
-        <a href="/family/{{miiInfo.id_famille}}">
-            <p>{{familyName}} family</p>
-        </a>
+        {% if familyName %}
+            <a href="/display_mii/{{miiInfo.id_famille}}/{{miiInfo.id_mii}}">
+                <p>{{familyName}} family</p>
+            </a>
+        {% else %}
+            <p>{{miiInfo.nom_mii}} is not part of a family.</p>
+        {% endif %}
         {%if partnerInfo%}
             <p>Partner: {{partnerInfo.nom_mii}}</p>
             <a href="/display_mii/{{partnerInfo.id_mii}}">
