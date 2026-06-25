@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Family</title>
 </head>
 <body>
-    <h1>All members of family {{}}</h1>
-    <div class="miis-container">
-
+    <!-- test -->
+    <h1>Other members of {{mii}}'s family</h1>
+    <div class="family-miis-container">
+        <p>Father</p>
+        <div class="mii-card">
+           <img src="{{FatherInfo.image}}" alt="{{FatherInfo.nom_mii}}">
+            <p>{{FatherInfo.nom_mii}}</p>
+        </div>
+        <p>Mother</p>
+        <div class="mii-card">
+           <img src="{{MotherInfo.image}}" alt="{{FatherInfo.nom_mii}}">
+            <p>{{FatherInfo.nom_mii}}</p>
+        </div>
+        <p>Siblings</p>
+        {% for siblingInfo in siblingsInfo %}
+            <div class="mii-card">
+                <a href="/display_mii?id_mii={{siblingInfo.id_mii}}">
+                    <img src="{{siblingInfo.image}}" alt="{{siblingInfo.nom_mii}}">
+                </a>
+                <p>{{siblingInfo.nom_mii}}</p>
+            </div>
+        {% endfor %}
+        <p>Other members</p>
+        {% for member in otherMembers %}
+            <div class="mii-card">
+                <a href="/display_mii?id_mii={{member.id_mii}}">
+                    <img src="{{member.image}}" alt="{{member.nom_mii}}">
+                </a>
+                <p>{{siblingInfo.nom_mii}}</p>
+            </div>
+        {% endfor %}
     </div>
 </body>
 </html>
