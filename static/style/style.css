@@ -358,3 +358,83 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     font-size: 0.85rem;
     color: var(--bleu_fonce);
 }
+
+.mii-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.mii-avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid var(--jaune);
+    flex-shrink: 0;
+}
+
+.section-bloc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-title {
+    font-family: "DreamLife", sans-serif;
+    font-size: 1rem;
+    color: var(--bleu_fonce);
+    margin: 0;
+}
+
+.relation-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    width: fit-content;
+}
+
+.relation-card a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--noir_site);
+}
+
+.relation-card img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.15s;
+}
+.relation-card img:hover { transform: scale(1.08); }
+
+.relation-card p { font-size: 0.85rem; }
+
+
+.relation-card.partner {
+    background-color: var(--bleu);
+    border: 2px solid var(--bleu_fonce);
+}
+
+
+.relation-card.crush {
+    background-color: #fde8ea;
+    border: 2px solid #f4a0a4;
+}
+
+.hearts {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+}
+
+.relation-empty {
+    font-size: 0.85rem;
+    color: var(--bleu_fonce);
+    font-style: italic;
+}

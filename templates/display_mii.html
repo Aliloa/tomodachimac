@@ -3,47 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mii</title>
+    <title>{{ miiInfo.nom_mii }} – TomoDachImac</title>
+    <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
 <body>
-    <h1>{{miiInfo.nom_mii}}</h1>
-    <img src="/static/miis/{{miiInfo.image}}" alt="{{miiInfo.nom_mii}}">
-
-    <div class="miis-informations">
-        <p>Age: {{miiInfo.age}}</p>
-        <p>Sex: {{miiInfo.sexe}}</p>
-        <p>Personnality: {{miiInfo.personnalite}}</p>
-        <p>Member of:</p>
-        <a href="/family/{{miiInfo.id_famille}}">
-            <p>{{familyName}} family</p>
-        </a>
-        {%if partnerInfo%}
-            <p>Partner: {{partnerInfo.nom_mii}}</p>
-            <a href="/display_mii/{{partnerInfo.id_mii}}">
-                <img src="{{partnerInfo.image}}" alt="{{partnerInfo.nom_mii}}">
-            </a>
-        {%else%}
-            <p>{{miiInfo.nom_mii}} has no partner for the moment.</p>
-        {%endif%}
-        {%if crushInfo%}
-            <p>Crush: {{crushInfo.nom_mii}}</p>
-            <a href="/display_mii/{{crushInfo.id_mii}}">
-                <img src="{{crushInfo.image}}" alt="{{crushInfo.nom_mii}}">
-            </a>
-        {%else%}
-            <p>{{miiInfo.nom_mii}} has no crush for the moment.</p>
-        {%endif%}
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
     </div>
-    
-    <div class="miis-container">
-        {% for mii in IslandMiis %}
-            <div class="mii-card">
-                <a href="/display_mii/{{mii.id_mii}}">
-                    <img src="{{mii.image}}" alt="{{mii.nom_mii}}">
-                </a>
-                <p>{{mii.name}}</p>
+
+    <div class="carte-large">
+
+
+        <div class="mii-header">
+            <img class="mii-avatar" src="/static/miis/{{ miiInfo.image }}" alt="{{ miiInfo.nom_mii }}">
+            <div>
+                <h2>{{miiInfo.nom_mii }}</h2>
+                <div class="stats-ile" style="margin-top:8px;">
+                    <span class="stat-badge"> {{ miiInfo.age }} y/o</span>
+                    <span class="stat-badge">{{ miiInfo.sexe }}</span>
+                    <span class="stat-badge"> {{ miiInfo.personnalite }}</span>
+                </div>
             </div>
-        {% endfor %}
+        </div>
+
+        <hr class="separateur">
+
+
+        {% if familyName %}
+        <div class="section-bloc">
+            <h3 class="section-title"> Family</h3>
+            <a class="badge-ile" href="/family/{{ miiInfo.if_famille }}">{{ familyName }} family</a>
+        </div>
+        {% endif %}
+
+        <div class="section-bloc">
+            <h3 class="section-title"> Partner</h3>
+            {% if partnerInfo %}
+            <div class="relation-card partner">
+                <a href="/display_mii/{{ partnerInfo.id_mii }}">
+                    <img src="/static/miis/{{ partnerInfo.image }}" alt="{{ partnerInfo.nom_mii }}">
+                    <p>{{ partnerInfo.nom_mii }}</p>
+                </a>
+            </div>
+            {% else %}
+            <p class="relation-empty">{{miiInfo.nom_mii}} has no partner for the moment.</p>
+            {% endif %}
+        </div>
+
+
+        <div class="section-bloc">
+            <h3 class="section-title"> Crush</h3>
+            {% if crushInfo %}
+            <div class="relation-card crush">
+                <div class="hearts"></div>
+                <a href="/display_mii/{{ crushInfo.id_mii }}">
+                    <img src="/static/miis/{{ crushInfo.image }}" alt="{{ crushInfo.nom_mii }}">
+                    <p>{{ crushInfo.nom_mii }}</p>
+                </a>
+                <div class="hearts"></div>
+            </div>
+            {% else %}
+            <p class="relation-empty">{{miiInfo.nom_mii}} has no crush for the moment.</p>
+            {% endif %}
+        </div>
+
+        <hr class="separateur">
+
+
+        <h3 class="section-title"> Other Mii on this island</h3>
+        <div class="miis-container">
+            {% for mii in IslandMiis %}
+            {% if mii.id_mii != miiInfo.id_mii %}
+            <div class="mii-card">
+                <a href="/display_mii/{{ mii.id_mii }}">
+                    <img src="/static/miis/{{ mii.image }}" alt="{{ mii.nom_mii }}">
+                    <p>{{ mii.nom_mii }}</p>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <p class="lien-secondaire"><a href="/island/{{ miiInfo.id_ile }}">Back to island</a></p>
     </div>
 </body>
 </html>
