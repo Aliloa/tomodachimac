@@ -14,19 +14,19 @@
         <p>Sex: {{miiInfo.sex}}</p>
         <p>Personnality: {{miiInfo.personnality}}</p>
         <p>Member of:</p>
-        <a href="/family?id_family={{miiInfo.id_famille}}">
+        <a href="/family/{{miiInfo.id_famille}}">
             <p>{{familyName}} family</p>
         </a>
         {%if partnerInfo%}
             <p>Partner: {{partnerInfo.nom_mii}}</p>
-            <a href="/display_mii?id_mii={{partnerInfo.id_mii}}">
+            <a href="/display_mii/{{partnerInfo.id_mii}}">
                 <img src="{{partnerInfo.image}}" alt="{{partnerInfo.nom_mii}}">
             </a>
         {%else%}
             <p>{{miiInfo.nom_mii}} has no partner for the moment.</p>
         {%if crushInfo%}
             <p>Crush: {{crushInfo.nom_mii}}</p>
-            <a href="/display_mii?id_mii={{crushInfo.id_mii}}">
+            <a href="/display_mii/{{crushInfo.id_mii}}">
                 <img src="{{crushInfo.image}}" alt="{{crushInfo.nom_mii}}">
             </a>
         {%else%}
@@ -37,7 +37,7 @@
     <div class="miis-container">
         {% for mii in IslandMiis %}
             <div class="mii-card">
-                <a href="/display_mii?id_mii={{mii.id_mii}}">
+                <a href="/display_mii/{{mii.id_mii}}">
                     <img src="{{mii.image}}" alt="{{mii.nom_mii}}">
                 </a>
                 <p>{{mii.name}}</p>
