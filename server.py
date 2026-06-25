@@ -100,7 +100,12 @@ def showIsland(id_ile):
 
 @server.route('/create_mii/<int:id_ile>', methods=['GET'])
 def display_mii_creator(id_ile):
-    return render_template('create_mii.html', id_ile=id_ile)
+    # information for db :
+    idUser = session['user']['id_compte']
+
+    allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
+
+    return render_template('create_mii.html', id_ile=id_ile, allIslandMiis=allIslandMiis)
 
 @server.route('/create_mii/<int:id_ile>', methods=['POST'])
 def create_mii(id_ile):
@@ -115,13 +120,12 @@ def create_mii(id_ile):
     idUser = session['user']['id_compte']
 
     if image and image.filename != '':
+        imageFilename = image.filename
         image.save(f"static/miis/{image.filename}") # saving the image the user imported
 
-    allIslandMiis = mii.getAllUserIslandMiis(idUser, id_ile)
+    mii.createMii(name, sex, age, personnality, imageFilename, idUser, id_ile)
 
-    mii.createMii(name, sex, age, personnality, image, idUser, id_ile)
-
-    return render_template('create_mii.html', IdIsland=id_ile, allIslandMiis=allIslandMiis)
+    return redirect('/profile')
 
 @server.route('/display_mii/<int:id_mii>', methods=['GET'])
 def display_mii(id_mii):
