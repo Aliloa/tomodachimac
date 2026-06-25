@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 24 juin 2026 à 08:34
+-- Généré le : mer. 24 juin 2026 à 11:56
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -46,6 +46,19 @@ INSERT INTO `compte` (`id_compte`, `pseudo`, `mdp`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `famille`
+--
+
+DROP TABLE IF EXISTS `famille`;
+CREATE TABLE IF NOT EXISTS `famille` (
+  `id_famille` int NOT NULL AUTO_INCREMENT,
+  `nom_famille` text NOT NULL,
+  PRIMARY KEY (`id_famille`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `ile`
 --
 
@@ -56,7 +69,16 @@ CREATE TABLE IF NOT EXISTS `ile` (
   `id_compte` int NOT NULL COMMENT 'cle etrangere',
   `note` int NOT NULL COMMENT 'cle etrangere',
   PRIMARY KEY (`id_ile`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `ile`
+--
+
+INSERT INTO `ile` (`id_ile`, `nom_ile`, `id_compte`, `note`) VALUES
+(1, 'ile de lebron', 1, 0),
+(2, 'seonde ile de lebron', 1, 0),
+(3, 'Tel Aviv', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -68,12 +90,40 @@ DROP TABLE IF EXISTS `mii`;
 CREATE TABLE IF NOT EXISTS `mii` (
   `id_mii` int NOT NULL AUTO_INCREMENT,
   `nom_mii` varchar(99) NOT NULL,
-  `sexe` enum('M','F') NOT NULL,
   `age` int NOT NULL,
   `image` int DEFAULT NULL,
   `id_ile` int NOT NULL COMMENT 'cle etrangere',
+  `sexe` text NOT NULL,
+  `personalite` text NOT NULL,
+  `if_famille` int DEFAULT NULL COMMENT '#',
+  `id_pere` int DEFAULT NULL COMMENT '#',
+  `id_mere` int DEFAULT NULL COMMENT '#',
+  `id_partenaire` int DEFAULT NULL COMMENT '#',
+  `id_crush` int DEFAULT NULL COMMENT '#',
   PRIMARY KEY (`id_mii`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `note`
+--
+
+DROP TABLE IF EXISTS `note`;
+CREATE TABLE IF NOT EXISTS `note` (
+  `id_note` int NOT NULL AUTO_INCREMENT,
+  `note` int NOT NULL,
+  `id_ile` int NOT NULL COMMENT 'cle etrangere',
+  PRIMARY KEY (`id_note`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`id_note`, `note`, `id_ile`) VALUES
+(1, 3, 2),
+(2, 0, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

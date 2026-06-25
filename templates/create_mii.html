@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Mii</title>
+    <script src="../static/js/create_mii.js"></script> <!-- for crush imput if crush exists -->
 </head>
 <body>
     <div class="carte">
@@ -26,8 +27,40 @@
             <option value="reserved">reserved</option>
             <option value="ambitious">ambitious</option>
         </select>
-        Import image: <input type="file" name="image" accept="image/*">
-        
+        Import mii image: <input type="file" name="image" accept="image/*">
+
+        Does your mii have a crush on an existing mii on {{idIsland}} island ?
+        <select name="crush_choice" class="user_choice" onchange="toggleInput()">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+        </select>
+
+        <div class="user-input" style="display:none;">
+            <select name="crush_id" class="user_id">
+                <option value="">Which one ?
+                    {% for mii in allIslandMiis%}
+                        <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
+                    {% endfor %}
+                </option>
+            </select>
+        </div>
+
+        Does your mii have an existing mii for partner on {{idIsland}} island ?
+        <select name="crush_choice" class="user_choice" onchange="toggleInput()">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+        </select>
+
+        <div class="user-input" style="display:none;">
+            <select name="crush_id" class="user_id">
+                <option value="">Which one ?
+                    {% for mii in allIslandMiis%}
+                        <option value="{{mii.id_mii}}">{{mii.nom_mii}}</option>
+                    {% endfor %}
+                </option>
+            </select>
+        </div>
+
         <input type="hidden" name="id_ile" value="{{idIsland}}"> <!-- hidden input to get id_ile -->
         <button type='submit'>Create mii</button>
     </form>
