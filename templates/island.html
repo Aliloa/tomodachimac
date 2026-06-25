@@ -4,16 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island</title>
+    <title>{{ islandName }} – TomoDachImac</title>
     <link rel="stylesheet" href="../static/style/style.css">
     <link rel="icon" type="image/png" href="../static/style/assets/logo_tomodachimac.png">
 </head>
 
 <body>
-    <div class="carte">
+        <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
+
+<div class="carte-large">
         <h1>{{ ile['nom_ile'] }}</h1>
-        <p>Average note: {{ avgNote }}</p>
-        <p>Number of Miis: {{ nbMiis }}</p>
+                <div class="stats-ile">
+            <span class="stat-badge"> {{ avgNote }} / 5</span>
+            <span class="stat-badge"> {{ nbMiis }} Miis</span>
+        </div>
+
+        <hr class="separateur">
 
         <div class="miis-container">
             {% for mii in IslandMiis %}
@@ -28,12 +36,13 @@
             {% if session['user']['id_compte'] == ile['id_compte'] %}
             <div class="mii-card">
                 <a href="/create_mii/{{ ile['id_ile'] }}">
-                    Create new mii
+                    New mii
                     <img src="../miis/create_mii.png" alt="mii creation">
                 </a>
             </div>
             {% endif %}
         </div>
+        <p class="lien-secondaire"><a href="/profile">Back to profile</a></p>
     </div>
 </body>
 

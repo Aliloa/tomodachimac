@@ -13,30 +13,30 @@
     <div class="carte">
         {% if session['user'] %}
 
-        <p>Bonjour {{session['user']['pseudo']}}</p>
+        <p>Hello {{session['user']['pseudo']}}</p>
 
         {% if iles %}
         {% for ile in iles %}
         <div class="ile-bloc">
             <form action="/rename_island/{{ ile['id_ile']}}" method="POST">
                 <input type="text" value="{{ile['nom_ile']}}" name="nom">
-                <button type="submit" class="boutton-sm">Renommer</button>
+                <button type="submit" class="boutton-sm">Rename</button>
             </form>
             <div class="ile-actions">
-                <a class="boutton-sm" href="/island/{{ile['id_ile']}}">Voir</a>
-                <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Noter</a>
+                <a class="boutton-sm" href="/island/{{ile['id_ile']}}">Open</a>
+                <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Rate</a>
                 <form action="/delete_island/{{ ile['id_ile']}}" method="POST">
-                    <button type="submit" class="boutton-danger">Supprimer</button>
+                    <button type="submit" class="boutton-danger">Delete</button>
                 </form>
             </div>
         </div>
         {% endfor %}
         <hr class="separateur">
-        <p><a class="lien-secondaire" href="/create_island">Ajouter une nouvelle île</a></p>
-        <p><a href="/all_islands">Voir les iles de tout le monde</a></p>
+        <p><a class="lien-secondaire" href="/create_island">Add a new island</a></p>
+        <p><a href="/all_islands">Show every island</a></p>
         {% else %}
-        <p>Vous n'avez pas d'île <a href="/create_island">créer une île</a></p>
-        <a href="/deconnexion">déconnexion</a>
+        <p>You don't have any island <a href="/create_island">create island</a></p>
+        <a href="/deconnexion">deconnexion</a>
         {% endif %}
 
         {% else %}
