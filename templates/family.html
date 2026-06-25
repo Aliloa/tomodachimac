@@ -3,39 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family</title>
+    <title>Family – TomoDachImac</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}">
 </head>
 <body>
-    <h1>Other members of {{miiInfo.nom_mii}}'s family</h1>
-    <div class="family-miis-container">
-        <p>Father</p>
-        <div class="mii-card">
-           <img src="{{fatherInfo.image}}" alt="{{fatherInfo.nom_mii}}">
-            <p>{{fatherInfo.nom_mii}}</p>
-        </div>
-        <p>Mother</p>
-        <div class="mii-card">
-           <img src="{{motherInfo.image}}" alt="{{motherInfo.nom_mii}}">
-            <p>{{motherInfo.nom_mii}}</p>
-        </div>
-        <p>Siblings</p>
-        {% for siblingInfo in siblingsInfo %}
-            <div class="mii-card">
-                <a href="/display_mii?id_mii={{siblingInfo.id_mii}}">
-                    <img src="{{siblingInfo.image}}" alt="{{siblingInfo.nom_mii}}">
-                </a>
-                <p>{{siblingInfo.nom_mii}}</p>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='style/assets/logo_tomodachimac.png') }}" alt="TomoDachImac">
+    </div>
+
+    <div class="carte-large">
+        <h2>{{miiInfo.nom_mii}}'s family</h2>
+
+        <hr class="separateur-section">
+        <p class="form-section-title">Parents</p>
+
+        <div class="family-row">
+            <div class="family-member-bloc">
+                <p class="family-role">Father</p>
+                {% if fatherInfo %}
+                <div class="mii-card">
+                    <a href="/display_mii/{{fatherInfo.id_mii}}">
+                        <img src="/static/miis/{{fatherInfo.image}}" alt="{{fatherInfo.nom_mii}}">
+                        <p>{{fatherInfo.nom_mii}}</p>
+                    </a>
+                </div>
+                {% else %}
+                <p class="relation-empty">Unknown</p>
+                {% endif %}
             </div>
-        {% endfor %}
-        <p>Other members</p>
-        {% for member in otherMembers %}
-            <div class="mii-card">
-                <a href="/display_mii?id_mii={{member.id_mii}}">
-                    <img src="{{member.image}}" alt="{{member.nom_mii}}">
-                </a>
-                <p>{{siblingInfo.nom_mii}}</p>
+
+            <div class="family-member-bloc">
+                <p class="family-role">Mother</p>
+                {% if motherInfo %}
+                <div class="mii-card">
+                    <a href="/display_mii/{{motherInfo.id_mii}}">
+                        <img src="/static/miis/{{motherInfo.image}}" alt="{{motherInfo.nom_mii}}">
+                        <p>{{motherInfo.nom_mii}}</p>
+                    </a>
+                </div>
+                {% else %}
+                <p class="relation-empty">Unknown</p>
+                {% endif %}
             </div>
-        {% endfor %}
+        </div>
+
+        <hr class="separateur-section">
+        <p class="form-section-title">Siblings</p>
+
+        {% if siblingsInfo %}
+        <div class="miis-container">
+            {% for siblingInfo in siblingsInfo %}
+            <div class="mii-card">
+                <a href="/display_mii/{{siblingInfo.id_mii}}">
+                    <img src="/static/miis/{{siblingInfo.image}}" alt="{{siblingInfo.nom_mii}}">
+                    <p>{{siblingInfo.nom_mii}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="relation-empty">No siblings.</p>
+        {% endif %}
+
+        <hr class="separateur-section">
+        <p class="form-section-title">Other members</p>
+
+        {% if otherMembers %}
+        <div class="miis-container">
+            {% for member in otherMembers %}
+            <div class="mii-card">
+                <a href="/display_mii/{{member.id_mii}}">
+                    <img src="/static/miis/{{member.image}}" alt="{{member.nom_mii}}">
+                    <p>{{member.nom_mii}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="relation-empty">No other members.</p>
+        {% endif %}
+
+        <p class="lien-secondaire"><a href="/display_mii/{{miiInfo.id_mii}}">Back to {{miiInfo.nom_mii}}</a></p>
     </div>
 </body>
 </html>

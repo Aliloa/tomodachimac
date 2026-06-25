@@ -466,3 +466,42 @@ body::after  { bottom: 0; border-radius: 60% 60% 0 0 / 40px 40px 0 0; }
     background: transparent;
     padding: 0;
 }
+
+.form-section-title {
+    font-family: "DreamLife", sans-serif;
+    font-size: 0.9rem;
+    color: var(--bleu_fonce);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: -4px;
+}
+
+.separateur-section {
+    border: none;
+    border-top: 2px solid var(--jaune);
+    margin: 8px 0 0;
+}
+
+
+.family-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.family-member-bloc {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.family-role {
+    font-family: "DreamLife", sans-serif;
+    font-size: 0.8rem;
+    color: var(--bleu_fonce);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
