@@ -18,3 +18,8 @@ def getUserByPseudo(pseudo):
     mycursor = mydb.cursor(dictionary=True)
     mycursor.execute("SELECT * FROM compte WHERE pseudo = %s", (pseudo,))
     return mycursor.fetchone()
+
+def getUserByIslandId(id_ile):
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT pseudo FROM compte JOIN ile ON ile.id_compte = compte.id_compte WHERE id_ile = %s", (id_ile,))
+    return mycursor.fetchone()

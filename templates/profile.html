@@ -13,7 +13,7 @@
     <div class="carte">
         {% if session['user'] %}
 
-        <p>Hello {{session['user']['pseudo']}}</p>
+        <p>Welcome to your profile {{session['user']['pseudo']}} : </p>
 
         {% if iles %}
         {% for ile in iles %}
