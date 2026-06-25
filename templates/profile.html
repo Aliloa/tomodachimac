@@ -17,15 +17,19 @@
 
         {% if iles %}
         {% for ile in iles %}
-        <form action="/rename_island/{{ ile['id_ile']}}" method="POST">
-            <input type="text" value="{{ile['nom_ile']}}" name="nom">
-            <button type="submit">Renommer</button>
-        </form>
-        <a class="badge-ile" href="/island/{{ile['id_ile']}}">voir</a>
-        <a href="/rate_island/{{ ile['id_ile'] }}">noter {{ ile['nom_ile'] }}</a>
-        <form action="/delete_island/{{ ile['id_ile']}}" method="POST">
-            <button type="submit">Supprimer</button>
-        </form>
+        <div class="ile-bloc">
+            <form action="/rename_island/{{ ile['id_ile']}}" method="POST">
+                <input type="text" value="{{ile['nom_ile']}}" name="nom">
+                <button type="submit" class="boutton-sm">Renommer</button>
+            </form>
+            <div class="ile-actions">
+                <a class="boutton-sm" href="/island/{{ile['id_ile']}}">Voir</a>
+                <a class="boutton-sm" href="/rate_island/{{ ile['id_ile'] }}">Noter</a>
+                <form action="/delete_island/{{ ile['id_ile']}}" method="POST">
+                    <button type="submit" class="boutton-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
         {% endfor %}
         <hr class="separateur">
         <p><a class="lien-secondaire" href="/create_island">Ajouter une nouvelle île</a></p>
