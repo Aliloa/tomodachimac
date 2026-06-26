@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 25 juin 2026 à 17:46
+-- Généré le : ven. 26 juin 2026 à 07:56
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -55,7 +55,14 @@ CREATE TABLE IF NOT EXISTS `famille` (
   `id_famille` int NOT NULL AUTO_INCREMENT,
   `nom_famille` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_famille`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `famille`
+--
+
+INSERT INTO `famille` (`id_famille`, `nom_famille`) VALUES
+(1, 'Les communaux');
 
 -- --------------------------------------------------------
 
@@ -68,7 +75,6 @@ CREATE TABLE IF NOT EXISTS `ile` (
   `id_ile` int NOT NULL AUTO_INCREMENT,
   `nom_ile` varchar(99) NOT NULL,
   `id_compte` int NOT NULL COMMENT 'cle etrangere',
-  `note` int NOT NULL COMMENT 'cle etrangere',
   PRIMARY KEY (`id_ile`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -76,10 +82,10 @@ CREATE TABLE IF NOT EXISTS `ile` (
 -- Déchargement des données de la table `ile`
 --
 
-INSERT INTO `ile` (`id_ile`, `nom_ile`, `id_compte`, `note`) VALUES
-(5, 'LEBRON ILAND YEAHHH', 4, 0),
-(4, 'IMAC 1', 3, 0),
-(15, 'imac island', 5, 0);
+INSERT INTO `ile` (`id_ile`, `nom_ile`, `id_compte`) VALUES
+(5, 'LEBRON ILAND YEAHHH', 4),
+(4, 'IMAC 1', 3),
+(15, 'imac island', 5);
 
 -- --------------------------------------------------------
 
@@ -102,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `mii` (
   `id_partenaire` int DEFAULT NULL COMMENT '#',
   `id_crush` int DEFAULT NULL COMMENT '#',
   PRIMARY KEY (`id_mii`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `mii`
@@ -114,9 +120,12 @@ INSERT INTO `mii` (`id_mii`, `nom_mii`, `age`, `image`, `id_ile`, `sexe`, `perso
 (5, 'basketball', 21, '17500.jpg', 5, 'man', 'considerate', NULL, NULL, NULL, NULL, NULL),
 (6, 'Jade', 21, 'IMG_2892 8.jpg', 15, 'woman', 'considerate', NULL, NULL, NULL, NULL, NULL),
 (7, 'Elouan', 22, 'IMG_2892 3.jpg', 15, 'man', 'outgoing', NULL, NULL, NULL, NULL, NULL),
-(8, 'Marine', 20, 'IMG_2892 4.jpg', 15, 'woman', 'reserved', NULL, NULL, NULL, 7, NULL),
+(14, 'Marine', 17, 'IMG_2892 4.jpg', 15, 'woman', 'reserved', NULL, NULL, NULL, 6, 10),
 (9, 'Ilyas', 22, 'image 13.jpg', 15, 'man', 'outgoing', NULL, NULL, 6, NULL, NULL),
-(10, 'Mathieu', 20, 'image 20.jpg', 15, 'man', 'considerate', NULL, NULL, NULL, NULL, 7);
+(10, 'Mathieu', 20, 'image 20.jpg', 15, 'man', 'considerate', NULL, NULL, NULL, NULL, 7),
+(11, 'Benoit', 22, 'IMG_2892 5.jpg', 15, 'man', 'outgoing', 1, NULL, NULL, NULL, 7),
+(12, 'Julien', 21, 'image 24.jpg', 15, 'man', 'ambitious', NULL, NULL, NULL, 11, 10),
+(13, 'Elea', 21, 'IMG_2892 7.jpg', 15, 'woman', 'ambitious', NULL, 6, 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
