@@ -17,7 +17,7 @@ def getIslandById(id_island):
 
 def addIsland(islandName, idIsland):
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("INSERT INTO ile (nom_ile, id_compte, note) VALUES (%s, %s, 0)", (islandName, idIsland))
+    mycursor.execute("INSERT INTO ile (nom_ile, id_compte) VALUES (%s, %s)", (islandName, idIsland))
     mydb.commit()
     mycursor.close()
 
