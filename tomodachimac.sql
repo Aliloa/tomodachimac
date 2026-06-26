@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 26 juin 2026 à 07:56
+-- Généré le : ven. 26 juin 2026 à 08:19
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -55,14 +55,15 @@ CREATE TABLE IF NOT EXISTS `famille` (
   `id_famille` int NOT NULL AUTO_INCREMENT,
   `nom_famille` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_famille`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `famille`
 --
 
 INSERT INTO `famille` (`id_famille`, `nom_famille`) VALUES
-(1, 'Les communaux');
+(1, 'Les communaux'),
+(2, 'Les communaux');
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `mii` (
   `id_partenaire` int DEFAULT NULL COMMENT '#',
   `id_crush` int DEFAULT NULL COMMENT '#',
   PRIMARY KEY (`id_mii`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `mii`
@@ -123,9 +124,12 @@ INSERT INTO `mii` (`id_mii`, `nom_mii`, `age`, `image`, `id_ile`, `sexe`, `perso
 (14, 'Marine', 17, 'IMG_2892 4.jpg', 15, 'woman', 'reserved', NULL, NULL, NULL, 6, 10),
 (9, 'Ilyas', 22, 'image 13.jpg', 15, 'man', 'outgoing', NULL, NULL, 6, NULL, NULL),
 (10, 'Mathieu', 20, 'image 20.jpg', 15, 'man', 'considerate', NULL, NULL, NULL, NULL, 7),
-(11, 'Benoit', 22, 'IMG_2892 5.jpg', 15, 'man', 'outgoing', 1, NULL, NULL, NULL, 7),
+(17, 'Benoit', 21, 'IMG_2892 5.jpg', 15, 'man', 'outgoing', 2, 7, 15, NULL, 7),
 (12, 'Julien', 21, 'image 24.jpg', 15, 'man', 'ambitious', NULL, NULL, NULL, 11, 10),
-(13, 'Elea', 21, 'IMG_2892 7.jpg', 15, 'woman', 'ambitious', NULL, 6, 8, NULL, NULL);
+(13, 'Elea', 21, 'IMG_2892 7.jpg', 15, 'woman', 'ambitious', NULL, 6, 8, NULL, NULL),
+(15, 'Lena', 22, 'image 14.jpg', 15, 'woman', 'outgoing', NULL, NULL, NULL, NULL, 13),
+(16, 'Agathe', 21, 'image 23.jpg', 15, 'woman', 'considerate', NULL, NULL, NULL, NULL, NULL),
+(18, 'Alex', 21, 'IMG_2892 9.jpg', 15, 'man', 'ambitious', 2, 15, 7, NULL, 12);
 
 -- --------------------------------------------------------
 
